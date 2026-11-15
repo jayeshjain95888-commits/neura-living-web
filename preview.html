@@ -1,0 +1,2215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neura Living | Unified Space Operating System</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Razorpay Checkout Script -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Color Graded Plain Liquid Glass Finish */
+    :root {
+      --bg-base: #f8fafc;
+      --glass-surface: rgba(255, 255, 255, 0.72);
+      --glass-card: rgba(255, 255, 255, 0.84);
+      --glass-card-hover: rgba(255, 255, 255, 0.96);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --glass-shadow: 0 12px 36px -4px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.6);
+      --glass-blur: blur(20px);
+    }
+
+    body {
+      background-color: #f8fafc;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.45) 0px, transparent 45%),
+        radial-gradient(at 100% 0%, rgba(241, 245, 249, 0.8) 0px, transparent 40%),
+        radial-gradient(at 50% 40%, rgba(248, 250, 252, 0.9) 0px, transparent 60%),
+        radial-gradient(at 100% 100%, rgba(226, 232, 240, 0.6) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(236, 253, 245, 0.35) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: #0f172a;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .liquid-glass {
+      background: var(--glass-surface);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .liquid-glass-card {
+      background: var(--glass-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 0 0 1px rgba(255, 255, 255, 0.8);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .liquid-glass-card:hover {
+      background: var(--glass-card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.07), 0 0 0 1px rgba(255, 255, 255, 0.95);
+    }
+
+    .liquid-glass-nav {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+    }
+
+    /* Subdued color grading pill badges */
+    .pill-slate { background: rgba(241, 245, 249, 0.8); color: #334155; border: 1px solid rgba(203, 213, 225, 0.6); }
+    .pill-emerald { background: rgba(236, 253, 245, 0.85); color: #065f46; border: 1px solid rgba(167, 243, 208, 0.6); }
+    .pill-amber { background: rgba(254, 243, 199, 0.85); color: #92400e; border: 1px solid rgba(253, 230, 138, 0.6); }
+    .pill-sky { background: rgba(240, 249, 255, 0.85); color: #075985; border: 1px solid rgba(186, 230, 253, 0.6); }
+    .pill-rose { background: rgba(255, 241, 242, 0.85); color: #9f1239; border: 1px solid rgba(254, 205, 211, 0.6); }
+
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.35); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 0.55); }
+
+    .glow-dot {
+      animation: subtleGlow 2.4s ease-in-out infinite;
+    }
+    @keyframes subtleGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.9); }
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen text-slate-800">
+
+  <!-- ========================================================================= -->
+  <!-- TOP GLOBAL NAVIGATION BAR -->
+  <!-- ========================================================================= -->
+  <header class="sticky top-0 z-40 liquid-glass-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Logo & Brand -->
+        <div class="flex items-center space-x-3">
+          <div onclick="switchView('landing')" class="flex items-center space-x-2.5 cursor-pointer group">
+            <div class="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-lg shadow-sm group-hover:scale-105 transition-transform">
+              N
+            </div>
+            <div>
+              <div class="flex items-center space-x-1.5">
+                <span class="font-bold text-slate-900 text-base tracking-tight">Neura Living</span>
+                <span class="text-[9px] uppercase font-bold tracking-wider text-slate-600 bg-slate-100/90 border border-slate-200/80 px-2 py-0.5 rounded-full">Jaipur SaaS</span>
+              </div>
+              <span class="text-[10px] text-slate-400 block -mt-0.5">PGs • Hotels • Apartments</span>
+            </div>
+          </div>
+
+          <!-- Property Selector (Visible when logged in as Owner) -->
+          <div id="propertySelectWrapper" class="hidden md:flex items-center ml-2 border-l border-slate-200 pl-3">
+            <div class="relative">
+              <select id="propertySelect" onchange="switchProperty(this.value)" class="text-xs font-semibold bg-white/70 hover:bg-white text-slate-800 border border-slate-200 rounded-lg px-2.5 py-1.5 pr-7 focus:outline-none focus:ring-1 focus:ring-slate-400 appearance-none cursor-pointer shadow-sm">
+                <option value="pg_1">🏠 Shree Ram PG (PG-SHREERAM-101)</option>
+                <option value="hotel_1">🏨 The Grand Rajputana (HT-RAJPUTANA-201)</option>
+                <option value="apt_1">🏢 Civil Lines Heights (APT-ROYAL-301)</option>
+              </select>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Nav Tabs (With Lock Indicators for Protected Panels) -->
+        <nav class="hidden lg:flex items-center space-x-1 bg-slate-200/50 p-1 rounded-xl border border-slate-200/80 text-xs font-medium">
+          <button onclick="requestAccess('landing')" class="nav-tab px-3 py-1.5 rounded-lg transition-all" data-view="landing">
+            🌐 Landing
+          </button>
+          <button onclick="requestAccess('superadmin')" class="nav-tab px-3 py-1.5 rounded-lg transition-all flex items-center" data-view="superadmin">
+            <span>🛡️ Super Admin</span>
+            <i id="lock-superadmin" data-lucide="lock" class="w-3 h-3 ml-1.5 text-slate-400"></i>
+          </button>
+          <button onclick="requestAccess('owner')" class="nav-tab px-3 py-1.5 rounded-lg transition-all flex items-center" data-view="owner">
+            <span>👑 Owner</span>
+            <i id="lock-owner" data-lucide="lock" class="w-3 h-3 ml-1.5 text-slate-400"></i>
+          </button>
+          <button onclick="requestAccess('pg')" class="nav-tab px-3 py-1.5 rounded-lg transition-all flex items-center" data-view="pg">
+            <span>🛏️ PG Module</span>
+            <i id="lock-pg" data-lucide="lock" class="w-3 h-3 ml-1.5 text-slate-400"></i>
+          </button>
+          <button onclick="requestAccess('hotel')" class="nav-tab px-3 py-1.5 rounded-lg transition-all flex items-center" data-view="hotel">
+            <span>🏨 Hotel PMS</span>
+            <i id="lock-hotel" data-lucide="lock" class="w-3 h-3 ml-1.5 text-slate-400"></i>
+          </button>
+          <button onclick="requestAccess('apartment')" class="nav-tab px-3 py-1.5 rounded-lg transition-all flex items-center" data-view="apartment">
+            <span>🏢 Apartments</span>
+            <i id="lock-apartment" data-lucide="lock" class="w-3 h-3 ml-1.5 text-slate-400"></i>
+          </button>
+          <button onclick="requestAccess('guest_qr')" class="nav-tab px-3 py-1.5 rounded-lg transition-all" data-view="guest_qr">
+            📱 Guest QR
+          </button>
+          <button onclick="requestAccess('staff_matrix')" class="nav-tab px-3 py-1.5 rounded-lg transition-all flex items-center" data-view="staff_matrix">
+            <span>👥 Staff & Member</span>
+            <i id="lock-staff_matrix" data-lucide="lock" class="w-3 h-3 ml-1.5 text-slate-400"></i>
+          </button>
+        </nav>
+
+        <!-- Right Side: Session State / Login Trigger -->
+        <div class="flex items-center space-x-2 sm:space-x-2.5">
+          
+          <!-- Connectors Modal Trigger -->
+          <button onclick="openModal('connectorsModal')" class="flex items-center space-x-1.5 text-xs font-semibold text-slate-700 bg-white/90 hover:bg-white border border-slate-200/90 px-2.5 py-1.5 rounded-xl shadow-sm transition">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 glow-dot"></span>
+            <span class="hidden sm:inline">Connectors</span>
+            <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5 text-slate-400"></i>
+          </button>
+
+          <!-- Hindi/English Toggle -->
+          <button onclick="toggleLang()" id="langBtn" class="text-xs font-bold px-2 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition">
+            हिंदी
+          </button>
+
+          <!-- Unauthenticated Login Button -->
+          <div id="unauthNavBlock">
+            <button onclick="openAuthModal('owner')" class="flex items-center space-x-1.5 text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl shadow-sm transition">
+              <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
+              <span>Sign In</span>
+            </button>
+          </div>
+
+          <!-- Authenticated Session Indicator -->
+          <div id="authNavBlock" class="hidden items-center space-x-2">
+            <div class="flex items-center space-x-2 bg-slate-100/90 border border-slate-200/80 px-2.5 py-1 rounded-xl text-xs">
+              <div id="userAvatar" class="w-5 h-5 rounded-full bg-slate-900 text-white font-bold text-[10px] flex items-center justify-center">O</div>
+              <div class="text-left leading-none">
+                <span id="userName" class="font-bold text-slate-800 block text-[11px]">Devendra Sharma</span>
+                <span id="userRoleBadge" class="text-[9px] font-semibold text-slate-500 uppercase">Owner</span>
+              </div>
+            </div>
+            <button onclick="logout()" title="Sign Out" class="p-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl transition border border-rose-200/70">
+              <i data-lucide="log-out" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- SUBNAV BANNER -->
+  <div id="subnavBanner" class="bg-white/50 border-b border-slate-200/60 py-1.5 px-4 text-xs text-slate-500 flex items-center">
+    <div class="max-w-7xl mx-auto w-full flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="text-slate-400 font-medium">Session:</span>
+        <span id="sessionStatusPill" class="font-bold text-slate-700 bg-slate-200/70 px-2 py-0.5 rounded-md">🔒 Not Logged In (Public Guest Mode)</span>
+        <span class="text-slate-400 hidden sm:inline">•</span>
+        <span id="activeSurfaceDesc" class="text-slate-500 hidden sm:inline">Select a role to log in with Owner ID, Admin ID, or Property Code + Phone OTP.</span>
+      </div>
+      <div class="flex items-center space-x-3 text-[11px] font-medium text-slate-500">
+        <span class="flex items-center text-emerald-700"><i data-lucide="check-circle" class="w-3 h-3 mr-1"></i> RBAC Gated</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MAIN APPLICATION SURFACES -->
+  <!-- ========================================================================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+
+    <!-- ======================================================================= -->
+    <!-- SURFACE 0: AUTHENTICATION / LOGIN GATE SCREEN -->
+    <!-- (Appears dynamically when an unauthenticated user clicks any locked tab) -->
+    <!-- ======================================================================= -->
+    <div id="surface-auth_gate" class="surface-view hidden max-w-lg mx-auto space-y-6 py-6">
+      <div class="liquid-glass rounded-3xl p-7 shadow-xl border border-white/90 space-y-5">
+        
+        <!-- Login Header -->
+        <div class="text-center pb-2 border-b border-slate-200/60">
+          <div id="authGateIcon" class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center mx-auto mb-3 shadow">
+            <i data-lucide="lock" class="w-6 h-6"></i>
+          </div>
+          <h2 id="authGateTitle" class="text-xl font-extrabold text-slate-900">Authentication Required</h2>
+          <p id="authGateSubtitle" class="text-xs text-slate-500 mt-1">Please sign in to access this secured space.</p>
+        </div>
+
+        <!-- Role Type Selector Pill -->
+        <div class="grid grid-cols-2 gap-1 bg-slate-100 p-1 rounded-xl text-xs font-bold text-center">
+          <button onclick="setAuthMode('credentials')" id="authTabCredentials" class="py-2 rounded-lg bg-white shadow-sm text-slate-900 transition">
+            Owner & Admin ID
+          </button>
+          <button onclick="setAuthMode('property_otp')" id="authTabPropertyOtp" class="py-2 rounded-lg text-slate-500 hover:text-slate-900 transition">
+            Property Code + Mobile OTP
+          </button>
+        </div>
+
+        <!-- FORM 1: Super Admin & Owner (ID + Password) -->
+        <div id="formCredentials" class="space-y-4 text-xs">
+          <div>
+            <label class="block text-slate-500 font-semibold mb-1">Select Persona</label>
+            <select id="credPersonaSelect" onchange="applyCredPreset(this.value)" class="w-full p-2.5 border border-slate-200 rounded-xl bg-slate-50 font-semibold text-slate-800">
+              <option value="owner">👑 Property Owner (Devendra Sharma)</option>
+              <option value="superadmin">🛡️ Platform Super Admin (Neura HQ)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-slate-500 font-semibold mb-1">User ID / Email / Phone</label>
+            <input id="inputCredId" type="text" value="owner@shreeram.com" class="w-full p-2.5 border border-slate-200 rounded-xl font-medium bg-white focus:ring-1 focus:ring-slate-400">
+          </div>
+
+          <div>
+            <label class="block text-slate-500 font-semibold mb-1">Secret Password</label>
+            <input id="inputCredPassword" type="password" value="OwnerPass@2026" class="w-full p-2.5 border border-slate-200 rounded-xl font-medium bg-white focus:ring-1 focus:ring-slate-400">
+          </div>
+
+          <button onclick="submitCredentialsLogin()" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs transition shadow flex items-center justify-center">
+            <i data-lucide="key" class="w-4 h-4 mr-2"></i>
+            <span>Authenticate & Access Dashboard</span>
+          </button>
+        </div>
+
+        <!-- FORM 2: Staff & Members (Property Code + Mobile Number + OTP) -->
+        <div id="formPropertyOtp" class="space-y-4 text-xs hidden">
+          <div>
+            <label class="block text-slate-500 font-semibold mb-1">Select Staff / Member Persona</label>
+            <select id="staffPersonaSelect" onchange="applyStaffPreset(this.value)" class="w-full p-2.5 border border-slate-200 rounded-xl bg-slate-50 font-semibold text-slate-800">
+              <option value="warden">👮 Warden (Ram Singh) • Shree Ram PG</option>
+              <option value="receptionist">🛎️ Receptionist (Pooja Verma) • Rajputana Hotel</option>
+              <option value="cleaner">🧹 Cleaner (Mohan Lal) • Rajputana Hotel</option>
+              <option value="student">🎓 Student (Rahul Sharma) • Bed 104-B</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-slate-500 font-semibold mb-1">PG / Hotel / Flat Property Code</label>
+            <input id="inputPropertyCode" type="text" value="PG-SHREERAM-101" placeholder="e.g. PG-SHREERAM-101" class="w-full p-2.5 border border-slate-200 rounded-xl font-mono uppercase font-bold text-slate-900 bg-white focus:ring-1 focus:ring-slate-400">
+            <span class="text-[10px] text-slate-400 mt-0.5 block">Provided by your property owner or front desk register.</span>
+          </div>
+
+          <div>
+            <label class="block text-slate-500 font-semibold mb-1">Registered Mobile Number</label>
+            <div class="flex space-x-2">
+              <span class="bg-slate-100 border border-slate-200 px-3 py-2.5 rounded-xl font-bold text-slate-700">+91</span>
+              <input id="inputStaffPhone" type="text" value="98290 12345" class="flex-1 p-2.5 border border-slate-200 rounded-xl font-medium bg-white focus:ring-1 focus:ring-slate-400">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-slate-500 font-semibold mb-1">Mobile OTP (Auto-dispatched via SMS)</label>
+            <input id="inputStaffOtp" type="text" value="7941" maxlength="4" class="w-full p-2.5 border border-slate-200 rounded-xl font-mono text-center tracking-widest text-lg font-bold bg-white">
+            <span class="text-[10px] text-emerald-700 font-medium mt-0.5 block">✓ Demo OTP 7941 verified.</span>
+          </div>
+
+          <button onclick="submitPropertyOtpLogin()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition shadow flex items-center justify-center">
+            <i data-lucide="shield-check" class="w-4 h-4 mr-2"></i>
+            <span>Verify Property Code & OTP</span>
+          </button>
+        </div>
+
+        <!-- Quick 1-Click Persona Shortcuts -->
+        <div class="pt-4 border-t border-slate-200/60 text-center">
+          <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-2">Instant 1-Click Test Personas</span>
+          <div class="flex flex-wrap justify-center gap-1.5 text-[11px] font-semibold">
+            <button onclick="quickLoginAs('owner')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-800">👑 Owner</button>
+            <button onclick="quickLoginAs('superadmin')" class="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 rounded-lg text-purple-800">🛡️ Super Admin</button>
+            <button onclick="quickLoginAs('warden')" class="px-2.5 py-1 bg-indigo-50 hover:bg-indigo-100 rounded-lg text-indigo-800">👮 Warden</button>
+            <button onclick="quickLoginAs('receptionist')" class="px-2.5 py-1 bg-sky-50 hover:bg-sky-100 rounded-lg text-sky-800">🛎️ Reception</button>
+            <button onclick="quickLoginAs('student')" class="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 rounded-lg text-amber-800">🎓 Student</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ======================================================================= -->
+    <!-- SURFACE 1: PRODUCT LANDING PAGE (Publicly Accessible) -->
+    <!-- ======================================================================= -->
+    <div id="surface-landing" class="surface-view space-y-12">
+      
+      <!-- Hero Section with Minimal Liquid Glass Card -->
+      <section class="liquid-glass rounded-3xl p-8 sm:p-12 text-center space-y-6 relative overflow-hidden">
+        <div class="inline-flex items-center space-x-2 bg-slate-100/90 border border-slate-200/80 px-3.5 py-1 rounded-full text-xs font-semibold text-slate-700">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 glow-dot"></span>
+          <span>Jaipur Pilot Open • 100+ Properties Onboarding</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight max-w-4xl mx-auto leading-tight">
+          One app to run every kind of rented space in India.
+        </h1>
+
+        <p class="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          Manage your <span class="font-bold text-slate-900">Hostels/PGs, Hotels, and Apartments</span> from one phone without being on site. Automated rent dues, live bed maps, hotel room boards, and QR guest experiences.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <button onclick="requestAccess('owner')" class="px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5 flex items-center">
+            <span>Login as Owner</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+          </button>
+          <button onclick="switchView('guest_qr')" class="px-6 py-3 bg-white/90 hover:bg-white text-slate-800 border border-slate-200/90 rounded-2xl text-xs sm:text-sm font-bold shadow-sm hover:shadow transition flex items-center">
+            <i data-lucide="qr-code" class="w-4 h-4 mr-2 text-amber-600"></i>
+            <span>Open Hotel Guest QR Page</span>
+          </button>
+          <button onclick="requestAccess('superadmin')" class="px-5 py-3 bg-slate-100/80 hover:bg-slate-200 text-slate-700 rounded-2xl text-xs sm:text-sm font-semibold transition">
+            🛡️ Super Admin Login
+          </button>
+        </div>
+
+        <!-- 30-min onboarding promise pill -->
+        <div class="pt-4 flex items-center justify-center space-x-6 text-xs text-slate-500">
+          <span class="flex items-center"><i data-lucide="clock" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> Setup in &lt; 30 mins</span>
+          <span class="flex items-center"><i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> Free CSV migration</span>
+          <span class="flex items-center"><i data-lucide="message-circle" class="w-3.5 h-3.5 mr-1 text-emerald-600"></i> WhatsApp-first</span>
+        </div>
+      </section>
+
+      <!-- Pain vs Solution Comparison (PRD Section 1 Table) -->
+      <section class="space-y-4">
+        <div class="text-center max-w-xl mx-auto">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">The Shared Pain Solved</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">"I can't see my money and staff without being there."</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Segment 1: Hostel / PG -->
+          <div class="liquid-glass-card rounded-2xl p-6 space-y-4 border-t-4 border-t-indigo-500">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold text-slate-900">Hostel & PG Owners</h3>
+              <span class="p-2 bg-indigo-50 text-indigo-700 rounded-xl"><i data-lucide="home" class="w-5 h-5"></i></span>
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-xl bg-rose-50/70 border border-rose-100 text-rose-900">
+                <span class="font-bold block mb-0.5">Daily Pain Today:</span>
+                Chasing rent, cash vs UPI confusion, deposit disputes, no live bed map, complaints lost in WhatsApp.
+              </div>
+              <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-emerald-950">
+                <span class="font-bold block mb-0.5">What Neura Living Does:</span>
+                Auto monthly dues, deposit refund calculator, live bed map, warden login & attendance, multi-PG view.
+              </div>
+            </div>
+            <button onclick="requestAccess('pg')" class="w-full text-xs font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 py-2 rounded-xl transition flex items-center justify-center">
+              <span>Login to PG Module</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
+            </button>
+          </div>
+
+          <!-- Segment 2: Hotel -->
+          <div class="liquid-glass-card rounded-2xl p-6 space-y-4 border-t-4 border-t-amber-500">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold text-slate-900">Boutique Hotel Owners</h3>
+              <span class="p-2 bg-amber-50 text-amber-700 rounded-xl"><i data-lucide="hotel" class="w-5 h-5"></i></span>
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-xl bg-rose-50/70 border border-rose-100 text-rose-900">
+                <span class="font-bold block mb-0.5">Daily Pain Today:</span>
+                No control on receptionist cash, double bookings, OTA commission, housekeeping chaos, paper registers.
+              </div>
+              <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-emerald-950">
+                <span class="font-bold block mb-0.5">What Neura Living Does:</span>
+                Role-based staff access, live room board, direct booking page, cleaner task list, QR guest portal, digital bills.
+              </div>
+            </div>
+            <button onclick="requestAccess('hotel')" class="w-full text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 py-2 rounded-xl transition flex items-center justify-center">
+              <span>Login to Hotel PMS</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
+            </button>
+          </div>
+
+          <!-- Segment 3: Apartments -->
+          <div class="liquid-glass-card rounded-2xl p-6 space-y-4 border-t-4 border-t-teal-500">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold text-slate-900">Apartment Portfolio</h3>
+              <span class="p-2 bg-teal-50 text-teal-700 rounded-xl"><i data-lucide="building" class="w-5 h-5"></i></span>
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-xl bg-rose-50/70 border border-rose-100 text-rose-900">
+                <span class="font-bold block mb-0.5">Daily Pain Today:</span>
+                Forgotten rent, vacancy gaps, expiring agreements, untracked repairs and maintenance, absentee owner stress.
+              </div>
+              <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-emerald-950">
+                <span class="font-bold block mb-0.5">What Neura Living Does:</span>
+                Per-flat records, automatic WhatsApp reminders, renewal & vacancy alerts, per-flat profit tracking.
+              </div>
+            </div>
+            <button onclick="requestAccess('apartment')" class="w-full text-xs font-bold text-teal-700 bg-teal-50 hover:bg-teal-100 py-2 rounded-xl transition flex items-center justify-center">
+              <span>Login to Apartment Module</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SaaS Pricing Plans (PRD Section 12) -->
+      <section class="liquid-glass rounded-3xl p-8 space-y-6">
+        <div class="text-center max-w-xl mx-auto">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Fair & Transparent Pricing</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Simple SaaS Plans for Property Owners</h2>
+          <p class="text-xs text-slate-500">Only the owner pays. Staff logins & guest QR web pages are included free.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Starter -->
+          <div class="liquid-glass-card rounded-2xl p-6 space-y-4">
+            <div>
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Starter Plan</span>
+              <div class="text-3xl font-extrabold text-slate-900 mt-1">₹49 <span class="text-xs font-normal text-slate-400">/ bed or room / mo</span></div>
+              <p class="text-xs text-slate-500 mt-1">For single small PG, guest house, or flat cluster.</p>
+            </div>
+            <ul class="text-xs text-slate-600 space-y-2 pt-2 border-t border-slate-100">
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Up to 30 beds/rooms</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Automated WhatsApp dues</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Razorpay payment links</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> 1 Warden / Staff account</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> 30-Day Free Trial</li>
+            </ul>
+            <button onclick="requestAccess('owner')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition">
+              Start 30-Day Free Trial
+            </button>
+          </div>
+
+          <!-- Growth (Featured) -->
+          <div class="liquid-glass-card rounded-2xl p-6 space-y-4 border-2 border-slate-900 relative">
+            <span class="absolute -top-3 right-4 bg-slate-900 text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full">Most Popular</span>
+            <div>
+              <span class="text-xs font-bold text-indigo-700 uppercase tracking-wide">Growth Plan</span>
+              <div class="text-3xl font-extrabold text-slate-900 mt-1">₹39 <span class="text-xs font-normal text-slate-400">/ bed or room / mo</span></div>
+              <p class="text-xs text-slate-500 mt-1">For owners managing multiple properties & staff.</p>
+            </div>
+            <ul class="text-xs text-slate-600 space-y-2 pt-2 border-t border-slate-100">
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Multi-Property consolidation</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Unlimited staff roles (Warden, Cleaner, Front Desk)</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Advance Deposit Refund ledger</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Hotel QR Guest web page</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Assisted CSV Onboarding</li>
+            </ul>
+            <button onclick="requestAccess('owner')" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition shadow">
+              Get Started with Growth
+            </button>
+          </div>
+
+          <!-- Pro -->
+          <div class="liquid-glass-card rounded-2xl p-6 space-y-4">
+            <div>
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Pro / Hotel Prime</span>
+              <div class="text-3xl font-extrabold text-slate-900 mt-1">₹59 <span class="text-xs font-normal text-slate-400">/ room / mo</span></div>
+              <p class="text-xs text-slate-500 mt-1">For larger boutique hotels with online booking & GST.</p>
+            </div>
+            <ul class="text-xs text-slate-600 space-y-2 pt-2 border-t border-slate-100">
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Direct Online Booking engine</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> GST Invoicing & tax reports</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Shift Cash Drawer handover audit</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Dedicated account manager in Jaipur</li>
+            </ul>
+            <button onclick="requestAccess('owner')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition">
+              Contact Jaipur Sales
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+
+    <!-- ======================================================================= -->
+    <!-- SURFACE 2: SUPER ADMIN PANEL (Requires Super Admin Login) -->
+    <!-- ======================================================================= -->
+    <div id="surface-superadmin" class="surface-view hidden space-y-6">
+      
+      <!-- Super Admin Header -->
+      <div class="liquid-glass rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full">Neura Living HQ</span>
+            <span class="text-xs text-slate-400">•</span>
+            <span class="text-xs text-slate-500">Jaipur Deployment Region</span>
+          </div>
+          <h2 class="text-xl font-extrabold text-slate-900 mt-1">Platform Super Admin Console</h2>
+          <p class="text-xs text-slate-500">Authenticated as: <span class="font-bold text-slate-800">admin@neuraliving.com</span></p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button onclick="showToast('Onboard organization wizard opened')" class="text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-2 rounded-xl shadow transition flex items-center">
+            <i data-lucide="plus" class="w-3.5 h-3.5 mr-1.5"></i> + Onboard Organization
+          </button>
+          <button onclick="logout()" class="text-xs font-semibold bg-white border border-slate-200 hover:bg-rose-50 text-rose-700 px-3 py-2 rounded-xl shadow-sm transition">
+            Sign Out Admin
+          </button>
+        </div>
+      </div>
+
+      <!-- SaaS Key Metrics -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="liquid-glass-card rounded-2xl p-5">
+          <div class="text-xs text-slate-500 font-medium flex items-center justify-between">
+            <span>Paying Properties (Jaipur)</span>
+            <i data-lucide="building-2" class="w-4 h-4 text-purple-600"></i>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">112 / 100</div>
+          <div class="text-[11px] text-emerald-600 font-semibold mt-1">✓ Goal exceeded for Phase 4</div>
+        </div>
+
+        <div class="liquid-glass-card rounded-2xl p-5">
+          <div class="text-xs text-slate-500 font-medium flex items-center justify-between">
+            <span>Platform Monthly MRR</span>
+            <i data-lucide="indian-rupee" class="w-4 h-4 text-emerald-600"></i>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">₹2,84,600</div>
+          <div class="text-[11px] text-slate-500 mt-1">Avg ₹2,541 / property</div>
+        </div>
+
+        <div class="liquid-glass-card rounded-2xl p-5">
+          <div class="text-xs text-slate-500 font-medium flex items-center justify-between">
+            <span>Total Units Under Mgmt</span>
+            <i data-lucide="layers" class="w-4 h-4 text-sky-600"></i>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">5,840</div>
+          <div class="text-[11px] text-slate-500 mt-1">Beds: 4,120 • Rooms: 1,120 • Flats: 600</div>
+        </div>
+
+        <div class="liquid-glass-card rounded-2xl p-5">
+          <div class="text-xs text-slate-500 font-medium flex items-center justify-between">
+            <span>Monthly Logo Churn</span>
+            <i data-lucide="shield-check" class="w-4 h-4 text-teal-600"></i>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">1.8%</div>
+          <div class="text-[11px] text-emerald-600 font-semibold mt-1">Target is &lt; 4%</div>
+        </div>
+      </div>
+
+      <!-- Tenants Table -->
+      <div class="liquid-glass rounded-2xl p-5 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <h3 class="font-bold text-slate-900 text-sm">Tenant Organizations & Subscription Status</h3>
+          <input type="text" placeholder="Search by owner name, city, phone..." class="text-xs bg-white border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-slate-400 w-full sm:w-64">
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-100/70 text-slate-700 uppercase font-bold text-[10px]">
+              <tr>
+                <th class="p-2.5 rounded-l-lg">Owner / Org Name</th>
+                <th class="p-2.5">Properties & Types</th>
+                <th class="p-2.5">Units</th>
+                <th class="p-2.5">SaaS Plan</th>
+                <th class="p-2.5">MRR</th>
+                <th class="p-2.5">Status</th>
+                <th class="p-2.5 rounded-r-lg text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="hover:bg-white/50">
+                <td class="p-2.5 font-bold text-slate-900">
+                  Devendra Sharma
+                  <span class="block text-[10px] font-normal text-slate-400">+91 98290 44102 • Jaipur</span>
+                </td>
+                <td class="p-2.5">
+                  <span class="font-medium text-slate-800">3 Properties</span>
+                  <span class="block text-[10px] text-slate-400">Shree Ram PG, Rajputana Hotel, Royal Flats</span>
+                </td>
+                <td class="p-2.5 font-bold text-slate-800">162 Units</td>
+                <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold pill-emerald">Growth Plan</span></td>
+                <td class="p-2.5 font-semibold text-slate-900">₹6,318/mo</td>
+                <td class="p-2.5"><span class="text-emerald-700 font-bold">Active</span></td>
+                <td class="p-2.5 text-right">
+                  <button onclick="quickLoginAs('owner')" class="text-[11px] font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 px-2.5 py-1 rounded-lg">
+                    Impersonate
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ======================================================================= -->
+    <!-- SURFACE 3: OWNER CONSOLE (Requires Owner Login) -->
+    <!-- ======================================================================= -->
+    <div id="surface-owner" class="surface-view hidden space-y-6">
+      
+      <!-- Top Metrics Row -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="liquid-glass-card rounded-2xl p-5">
+          <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-1">
+            <span>Portfolio Occupancy</span>
+            <i data-lucide="pie-chart" class="w-4 h-4 text-slate-400"></i>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">88.4%</div>
+          <div class="text-xs text-emerald-600 font-semibold mt-1 flex items-center">
+            <i data-lucide="trending-up" class="w-3 h-3 mr-0.5"></i> +4.2% vs last month
+          </div>
+          <div class="text-[11px] text-slate-400 mt-2">144 occupied / 162 total units</div>
+        </div>
+
+        <div class="liquid-glass-card rounded-2xl p-5">
+          <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-1">
+            <span>Monthly Collected</span>
+            <i data-lucide="arrow-down-left" class="w-4 h-4 text-emerald-600"></i>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">₹4,82,500</div>
+          <div class="text-xs text-slate-500 mt-1">UPI: 78% • Cash: 22%</div>
+          <div class="text-[11px] text-emerald-700 mt-2 font-semibold">92% collection efficiency</div>
+        </div>
+
+        <div class="liquid-glass-card rounded-2xl p-5">
+          <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-1">
+            <span>Outstanding Dues</span>
+            <i data-lucide="alert-circle" class="w-4 h-4 text-amber-500"></i>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-amber-600 tracking-tight">₹68,200</div>
+          <div class="text-xs text-slate-500 mt-1">Across 11 residents/tenants</div>
+          <button onclick="triggerAllReminders()" class="mt-2 text-[11px] font-bold text-slate-800 bg-slate-100 hover:bg-slate-200 px-2 py-1.5 rounded-lg transition w-full text-center">
+            🚀 Send WhatsApp Dues
+          </button>
+        </div>
+
+        <div class="liquid-glass-card rounded-2xl p-5">
+          <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-1">
+            <span>Net Profit (Est.)</span>
+            <i data-lucide="wallet" class="w-4 h-4 text-slate-400"></i>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">₹3,67,100</div>
+          <div class="text-xs text-slate-500 mt-1">Total Expenses: ₹1,15,400</div>
+          <div class="text-[11px] text-slate-400 mt-2">After electricity, staff, food</div>
+        </div>
+      </div>
+
+      <!-- Multi-Property Switchable Portfolio Cards -->
+      <div class="liquid-glass rounded-2xl p-6 space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900">Your Jaipur Property Portfolio</h2>
+            <p class="text-xs text-slate-500">One owner login, mixed assets. Click any card to launch its dedicated module.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button onclick="exportCSV()" class="flex items-center space-x-1 text-xs font-semibold bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 px-3 py-2 rounded-xl shadow-sm transition">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Export Ledgers</span>
+            </button>
+            <button onclick="logout()" class="text-xs font-semibold bg-rose-50 hover:bg-rose-100 text-rose-700 px-3 py-2 rounded-xl transition">
+              Log Out Owner
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- Property 1: Hostel / PG -->
+          <div onclick="switchView('pg')" class="liquid-glass-card rounded-2xl p-5 cursor-pointer border-l-4 border-l-indigo-500 group">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold tracking-wider text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full">Hostel / PG</span>
+                <h3 class="text-base font-bold text-slate-900 mt-2 group-hover:text-indigo-600 transition-colors">Shree Ram PG & Hostel</h3>
+                <p class="text-xs text-slate-500">Pratap Nagar, Jaipur</p>
+                <div class="mt-1 text-[11px] font-mono text-slate-400">Code: <span class="text-slate-800 font-bold">PG-SHREERAM-101</span></div>
+              </div>
+              <div class="p-2.5 bg-indigo-50 rounded-xl text-indigo-600 group-hover:scale-110 transition-transform">
+                <i data-lucide="home" class="w-5 h-5"></i>
+              </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <span class="text-slate-400 block text-[11px]">Beds (Occ / Total)</span>
+                <span class="font-bold text-slate-800">106 / 120 (88%)</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[11px]">Monthly Revenue</span>
+                <span class="font-bold text-slate-800">₹2,85,000</span>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between text-xs font-bold text-indigo-600">
+              <span>Open Bed Map & Dues</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Property 2: Hotel -->
+          <div onclick="switchView('hotel')" class="liquid-glass-card rounded-2xl p-5 cursor-pointer border-l-4 border-l-amber-500 group">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">Hotel & Suites</span>
+                <h3 class="text-base font-bold text-slate-900 mt-2 group-hover:text-amber-600 transition-colors">The Grand Rajputana</h3>
+                <p class="text-xs text-slate-500">Mansarovar, Jaipur</p>
+                <div class="mt-1 text-[11px] font-mono text-slate-400">Code: <span class="text-slate-800 font-bold">HT-RAJPUTANA-201</span></div>
+              </div>
+              <div class="p-2.5 bg-amber-50 rounded-xl text-amber-600 group-hover:scale-110 transition-transform">
+                <i data-lucide="hotel" class="w-5 h-5"></i>
+              </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <span class="text-slate-400 block text-[11px]">Rooms Active</span>
+                <span class="font-bold text-slate-800">21 / 24 Occupied</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[11px]">ADR (Avg Rate)</span>
+                <span class="font-bold text-slate-800">₹2,450 / night</span>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between text-xs font-bold text-amber-600">
+              <span>Open Hotel Room Board</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Property 3: Apartment -->
+          <div onclick="switchView('apartment')" class="liquid-glass-card rounded-2xl p-5 cursor-pointer border-l-4 border-l-teal-500 group">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold tracking-wider text-teal-700 bg-teal-50 px-2 py-0.5 rounded-full">Apartment Rentals</span>
+                <h3 class="text-base font-bold text-slate-900 mt-2 group-hover:text-teal-600 transition-colors">Civil Lines Royal Heights</h3>
+                <p class="text-xs text-slate-500">Civil Lines, Jaipur</p>
+                <div class="mt-1 text-[11px] font-mono text-slate-400">Code: <span class="text-slate-800 font-bold">APT-ROYAL-301</span></div>
+              </div>
+              <div class="p-2.5 bg-teal-50 rounded-xl text-teal-600 group-hover:scale-110 transition-transform">
+                <i data-lucide="building" class="w-5 h-5"></i>
+              </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <span class="text-slate-400 block text-[11px]">Occupied Flats</span>
+                <span class="font-bold text-slate-800">17 / 18 Flats</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[11px]">Monthly Rent</span>
+                <span class="font-bold text-slate-800">₹1,45,000</span>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between text-xs font-bold text-teal-600">
+              <span>Open Apartment Profit Tracker</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================================= -->
+    <!-- SURFACE 4: HOSTEL / PG MODULE (Requires Owner or Warden Login) -->
+    <!-- ======================================================================= -->
+    <div id="surface-pg" class="surface-view hidden space-y-6">
+      
+      <!-- PG Subheader -->
+      <div class="liquid-glass rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <h2 class="text-lg font-bold text-slate-900">Shree Ram PG & Hostel – Bed Map & Operations</h2>
+            <span class="text-xs font-mono font-bold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full">PG-SHREERAM-101</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Live bed status, auto dues, advance deposit refund ledger, and student onboarding.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="openModal('onboardMemberModal')" class="text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white px-3 py-2 rounded-xl shadow-sm transition flex items-center">
+            <i data-lucide="user-plus" class="w-3.5 h-3.5 mr-1.5"></i> Onboard Student
+          </button>
+          <button onclick="openModal('depositRefundModal')" class="text-xs font-bold bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 px-3 py-2 rounded-xl shadow-sm transition flex items-center">
+            <i data-lucide="calculator" class="w-3.5 h-3.5 mr-1.5 text-amber-600"></i> Deposit Refund Calc
+          </button>
+          <button onclick="triggerAllReminders()" class="text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-xl shadow-sm transition flex items-center">
+            <i data-lucide="send" class="w-3.5 h-3.5 mr-1.5"></i> Send Reminders
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Bed Status Filter Chips -->
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <span class="text-slate-500 font-medium">Filter Beds:</span>
+        <button onclick="filterBeds('ALL')" class="bed-filter-btn px-3 py-1 rounded-full bg-slate-800 text-white font-bold" data-filter="ALL">All (120)</button>
+        <button onclick="filterBeds('OCCUPIED')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border" data-filter="OCCUPIED">🟢 Occupied (106)</button>
+        <button onclick="filterBeds('VACANT')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border" data-filter="VACANT">⚪ Vacant (9)</button>
+        <button onclick="filterBeds('NOTICE')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border" data-filter="NOTICE">🟡 Notice Period (3)</button>
+        <button onclick="filterBeds('RESERVED')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border" data-filter="RESERVED">🔵 Reserved (2)</button>
+      </div>
+
+      <!-- Interactive Bed Map Grid -->
+      <div class="liquid-glass rounded-2xl p-5 space-y-4">
+        <div class="flex items-center justify-between border-b pb-2">
+          <h3 class="font-bold text-slate-800 text-sm">Floor 1 – Ground Wing (Boys Deluxe)</h3>
+          <span class="text-xs text-slate-400">Click any bed to view details or pay dues</span>
+        </div>
+        <div id="pgBedsGrid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Mess Menu & Complaints -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="liquid-glass rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-slate-900">Weekly Mess Menu</h3>
+            <button onclick="showToast('Menu editor opened')" class="text-xs font-semibold text-slate-700 bg-white hover:bg-slate-100 border px-2.5 py-1 rounded-lg">Edit Menu</button>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="p-2.5 rounded-xl bg-white/70 border border-slate-100 flex justify-between items-center">
+              <div>
+                <span class="font-bold text-slate-800">Breakfast (7:30 - 9:30 AM)</span>
+                <p class="text-slate-500">Aloo Paratha, Curd, Pickle, Tea / Coffee</p>
+              </div>
+              <span class="text-[10px] pill-emerald font-bold px-2 py-0.5 rounded">Active Today</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white/70 border border-slate-100 flex justify-between items-center">
+              <div>
+                <span class="font-bold text-slate-800">Dinner (8:00 - 10:00 PM)</span>
+                <p class="text-slate-500">Paneer Butter Masala, Dal Tadka, Roti, Gulab Jamun</p>
+              </div>
+              <span class="text-[10px] pill-slate font-medium px-2 py-0.5 rounded">Special</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="liquid-glass rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-slate-900">Student Complaints & SLA</h3>
+            <button onclick="openModal('newTicketModal')" class="text-xs font-semibold text-slate-700 bg-white hover:bg-slate-100 border px-2.5 py-1 rounded-lg">+ New Ticket</button>
+          </div>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-white/70 border border-slate-100 flex items-center justify-between">
+              <div>
+                <div class="flex items-center space-x-2">
+                  <span class="font-bold text-slate-800">Room 104 – WiFi router reboot needed</span>
+                  <span class="text-[10px] pill-rose font-bold px-1.5 py-0.5 rounded">Open</span>
+                </div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Rahul Sharma • 45 mins ago</div>
+              </div>
+              <button onclick="resolveTicket(this)" class="px-2 py-1 text-[11px] font-semibold bg-slate-100 hover:bg-emerald-100 hover:text-emerald-800 rounded transition">
+                Resolve
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================================= -->
+    <!-- SURFACE 5: HOTEL PMS MODULE (Requires Owner or Receptionist Login) -->
+    <!-- ======================================================================= -->
+    <div id="surface-hotel" class="surface-view hidden space-y-6">
+      
+      <!-- Hotel Subheader -->
+      <div class="liquid-glass rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <h2 class="text-lg font-bold text-slate-900">The Grand Rajputana – Hotel Management & Room Board</h2>
+            <span class="text-xs font-mono font-bold bg-amber-50 text-amber-800 px-2 py-0.5 rounded-full">HT-RAJPUTANA-201</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Live room status, walk-in check-in, GST billing, and QR direct booking engine.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="openModal('hotelCheckinModal')" class="text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white px-3 py-2 rounded-xl shadow-sm transition flex items-center">
+            <i data-lucide="log-in" class="w-3.5 h-3.5 mr-1.5"></i> New Check-In
+          </button>
+          <button onclick="openModal('gstInvoiceModal')" class="text-xs font-bold bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 px-3 py-2 rounded-xl shadow-sm transition flex items-center">
+            <i data-lucide="receipt" class="w-3.5 h-3.5 mr-1.5 text-sky-600"></i> GST Invoice
+          </button>
+          <button onclick="switchView('guest_qr')" class="text-xs font-bold bg-amber-500 hover:bg-amber-600 text-white px-3 py-2 rounded-xl shadow-sm transition flex items-center">
+            <i data-lucide="qr-code" class="w-3.5 h-3.5 mr-1.5"></i> Guest QR View
+          </button>
+        </div>
+      </div>
+
+      <!-- Room Board -->
+      <div class="liquid-glass rounded-2xl p-5 space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-slate-800 text-sm">Interactive Room Status Board</h3>
+          <span class="text-xs text-slate-400">Click any room to Check-In, Check-Out, or Clean</span>
+        </div>
+        <div id="hotelRoomsGrid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3.5">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================================= -->
+    <!-- SURFACE 6: APARTMENT / RENTAL MODULE (Requires Owner Login) -->
+    <!-- ======================================================================= -->
+    <div id="surface-apartment" class="surface-view hidden space-y-6">
+      
+      <!-- Apartment Subheader -->
+      <div class="liquid-glass rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <h2 class="text-lg font-bold text-slate-900">Civil Lines Royal Heights – Flat Portfolio & Profitability</h2>
+            <span class="text-xs font-mono font-bold bg-teal-50 text-teal-800 px-2 py-0.5 rounded-full">APT-ROYAL-301</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Per-flat profit tracker, society maintenance dues, and 30/60 day agreement expiry alerts.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="triggerAllReminders()" class="text-xs font-bold bg-teal-600 hover:bg-teal-700 text-white px-3 py-2 rounded-xl shadow-sm transition flex items-center">
+            <i data-lucide="bell" class="w-3.5 h-3.5 mr-1.5"></i> WhatsApp Rent Reminders
+          </button>
+        </div>
+      </div>
+
+      <!-- Flats Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <!-- Flat 101 -->
+        <div class="liquid-glass-card rounded-2xl p-5 space-y-3">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="text-xs font-bold text-slate-900">Flat 101 (3BHK Deluxe)</span>
+              <p class="text-[11px] text-slate-500">Tenant: Dr. Alok Mathur</p>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold pill-emerald">Occupied</span>
+          </div>
+          <div class="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs">
+            <div>
+              <span class="text-slate-400 block text-[11px]">Monthly Rent</span>
+              <span class="font-bold text-slate-800">₹28,000</span>
+            </div>
+            <div>
+              <span class="text-slate-400 block text-[11px]">Society Maint.</span>
+              <span class="font-bold text-slate-800">₹3,500</span>
+            </div>
+            <div>
+              <span class="text-slate-400 block text-[11px]">Net Flat Profit</span>
+              <span class="font-bold text-emerald-600">₹24,500/mo</span>
+            </div>
+            <div>
+              <span class="text-slate-400 block text-[11px]">Deposit Held</span>
+              <span class="font-bold text-slate-800">₹56,000</span>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-[11px] text-slate-400">Ends: 15 Oct 2027</span>
+            <button onclick="sendTenantWhatsApp('Dr. Alok Mathur', '28000')" class="text-emerald-700 hover:text-emerald-800 font-bold flex items-center">
+              <i data-lucide="message-square" class="w-3.5 h-3.5 mr-1"></i> WhatsApp
+            </button>
+          </div>
+        </div>
+
+        <!-- Flat 202 -->
+        <div class="liquid-glass-card rounded-2xl p-5 space-y-3 border-l-4 border-l-amber-500">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="text-xs font-bold text-slate-900">Flat 202 (2BHK)</span>
+              <p class="text-[11px] text-slate-500">Tenant: Neha Agrawal</p>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold pill-amber">⚠️ 22 Days Left</span>
+          </div>
+          <div class="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs">
+            <div>
+              <span class="text-slate-400 block text-[11px]">Monthly Rent</span>
+              <span class="font-bold text-slate-800">₹22,000</span>
+            </div>
+            <div>
+              <span class="text-slate-400 block text-[11px]">Proposed Hike</span>
+              <span class="font-bold text-slate-800">+8% (₹23,760)</span>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+            <button onclick="sendRenewalNotice('Neha Agrawal', 'Flat 202')" class="text-[11px] font-bold bg-amber-50 text-amber-800 px-2 py-1 rounded">
+              Send Renewal
+            </button>
+            <button onclick="sendTenantWhatsApp('Neha Agrawal', '22000')" class="text-emerald-700 hover:text-emerald-800 font-bold flex items-center">
+              <i data-lucide="message-square" class="w-3.5 h-3.5 mr-1"></i> Collect
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================================= -->
+    <!-- SURFACE 7: HOTEL QR GUEST WEB PORTAL (Publicly Accessible with Mobile OTP) -->
+    <!-- ======================================================================= -->
+    <div id="surface-guest_qr" class="surface-view hidden space-y-6">
+      
+      <!-- QR Explanation Banner -->
+      <div class="liquid-glass rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div class="flex items-center space-x-3">
+          <div class="p-2.5 bg-amber-100 text-amber-800 rounded-xl">
+            <i data-lucide="smartphone" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <span class="font-bold text-slate-900 text-sm">QR Code Mobile Guest Web Page</span>
+            <p class="text-slate-500">Hotel Code: <span class="font-mono text-slate-900 font-bold">HT-RAJPUTANA-201</span> • Zero app install required</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button onclick="toggleMobileView()" id="viewToggleBtn" class="bg-white hover:bg-slate-50 border px-3 py-1.5 rounded-lg font-semibold text-slate-700 shadow-sm">
+            📱 Toggle Mobile Frame
+          </button>
+        </div>
+      </div>
+
+      <!-- Guest Portal Interface -->
+      <div id="guestPortalContainer" class="max-w-xl mx-auto liquid-glass rounded-3xl p-6 shadow-xl border border-white/80 space-y-5">
+        
+        <div class="text-center pb-4 border-b border-slate-200/60">
+          <span class="text-[10px] uppercase font-bold tracking-widest text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full">The Grand Rajputana Hotel</span>
+          <h2 class="text-xl font-extrabold text-slate-900 mt-2">Welcome to Jaipur</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Room 204 • Guest: Sarah Jenkins</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="showToast('Room booking opened')" class="p-4 rounded-2xl bg-white/80 border border-slate-200 hover:bg-white text-left transition shadow-sm group">
+            <i data-lucide="calendar" class="w-5 h-5 text-amber-600 mb-2 group-hover:scale-110 transition-transform"></i>
+            <div class="text-xs font-bold text-slate-800">Book Next Stay</div>
+            <div class="text-[10px] text-slate-400">Direct rate • No OTA fee</div>
+          </button>
+
+          <button onclick="showToast('Room service menu opened')" class="p-4 rounded-2xl bg-white/80 border border-slate-200 hover:bg-white text-left transition shadow-sm group">
+            <i data-lucide="coffee" class="w-5 h-5 text-indigo-600 mb-2 group-hover:scale-110 transition-transform"></i>
+            <div class="text-xs font-bold text-slate-800">Room Service & Menu</div>
+            <div class="text-[10px] text-slate-400">Food, tea, towels, laundry</div>
+          </button>
+
+          <button onclick="showToast('Hotel rules & WiFi password shown')" class="p-4 rounded-2xl bg-white/80 border border-slate-200 hover:bg-white text-left transition shadow-sm group">
+            <i data-lucide="file-text" class="w-5 h-5 text-sky-600 mb-2 group-hover:scale-110 transition-transform"></i>
+            <div class="text-xs font-bold text-slate-800">Hotel Rules & WiFi</div>
+            <div class="text-[10px] text-slate-400">Pass: Rajputana@2026</div>
+          </button>
+
+          <button onclick="openRazorpayModal('Sarah Jenkins', 5400, 'Hotel Bill Room 204')" class="p-4 rounded-2xl bg-emerald-50/80 border border-emerald-200 hover:bg-emerald-50 text-left transition shadow-sm group">
+            <i data-lucide="credit-card" class="w-5 h-5 text-emerald-700 mb-2 group-hover:scale-110 transition-transform"></i>
+            <div class="text-xs font-bold text-emerald-950">Pay Hotel Bill</div>
+            <div class="text-[10px] text-emerald-700">UPI, Card, NetBanking</div>
+          </button>
+        </div>
+
+        <!-- In-Room Service Request Trigger -->
+        <div class="p-4 rounded-2xl bg-white/70 border border-slate-200 space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold text-slate-900">Need something right now?</h4>
+            <span class="text-[10px] text-slate-400">Direct to Front Desk</span>
+          </div>
+          <div class="flex space-x-2">
+            <input id="guestQueryInput" type="text" placeholder="e.g. 2 extra towels, water bottle..." class="flex-1 text-xs bg-white border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-1 focus:ring-slate-400">
+            <button onclick="submitGuestRequest()" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-xl transition">
+              Send
+            </button>
+          </div>
+          <div id="guestRequestStatus" class="hidden text-[11px] text-emerald-800 bg-emerald-50 p-2 rounded-lg flex items-center">
+            <i data-lucide="check" class="w-3.5 h-3.5 mr-1 text-emerald-600"></i> Request dispatched to Receptionist & Cleaner!
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================================= -->
+    <!-- SURFACE 8: ROLE-BASED STAFF & STUDENT VIEWS (Requires Scoped Login) -->
+    <!-- ======================================================================= -->
+    <div id="surface-staff_matrix" class="surface-view hidden space-y-6">
+      
+      <!-- Sub-Role Selector Tabs -->
+      <div class="liquid-glass rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="text-base font-bold text-slate-900">Staff & Member Portal</h2>
+          <p id="staffScopeLabel" class="text-xs text-slate-500">Authenticated via Property Code & Mobile OTP.</p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <div class="flex items-center space-x-1 bg-slate-200/60 p-1 rounded-xl text-xs font-semibold">
+            <button onclick="switchStaffSubTab('warden')" class="staff-tab px-3 py-1.5 rounded-lg bg-white shadow-sm text-slate-900" data-staff="warden">👮 Warden</button>
+            <button onclick="switchStaffSubTab('receptionist')" class="staff-tab px-3 py-1.5 rounded-lg text-slate-600" data-staff="receptionist">🛎️ Reception</button>
+            <button onclick="switchStaffSubTab('cleaner')" class="staff-tab px-3 py-1.5 rounded-lg text-slate-600" data-staff="cleaner">🧹 Cleaner</button>
+            <button onclick="switchStaffSubTab('student')" class="staff-tab px-3 py-1.5 rounded-lg text-slate-600" data-staff="student">🎓 Student</button>
+          </div>
+          <button onclick="logout()" class="text-xs font-semibold bg-rose-50 hover:bg-rose-100 text-rose-700 px-3 py-1.5 rounded-xl transition">
+            Sign Out
+          </button>
+        </div>
+      </div>
+
+      <!-- 1. Warden Desk -->
+      <div id="subtab-warden" class="staff-subview space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="liquid-glass rounded-2xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-bold text-slate-900">Curfew Night Attendance (10:00 PM)</h3>
+              <span class="text-xs font-bold text-slate-500">106 Present</span>
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-xl bg-white/70 border border-slate-100 flex items-center justify-between">
+                <div>
+                  <span class="font-bold text-slate-800">Bed 101-A • Aman Verma</span>
+                  <div class="text-[11px] text-slate-400">98290 11223</div>
+                </div>
+                <button class="px-2 py-1 bg-emerald-100 text-emerald-800 rounded font-bold text-[11px]">Present</button>
+              </div>
+              <div class="p-2.5 rounded-xl bg-white/70 border border-slate-100 flex items-center justify-between">
+                <div>
+                  <span class="font-bold text-slate-800">Bed 104-B • Rahul Sharma</span>
+                  <div class="text-[11px] text-slate-400">Coaching Pass till 11 PM</div>
+                </div>
+                <button class="px-2 py-1 bg-amber-100 text-amber-800 rounded font-bold text-[11px]">Night Pass</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="liquid-glass rounded-2xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-bold text-slate-900">Cash Collections Logged by Warden</h3>
+              <button onclick="showToast('Recorded cash entry')" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg">+ Record Cash</button>
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-xl bg-white/70 border border-slate-100 flex justify-between">
+                <div>
+                  <span class="font-bold text-slate-800">₹8,000 Cash from Vikas Meena (Bed 202-A)</span>
+                  <div class="text-[11px] text-slate-400">Receipt: REC_PG_908</div>
+                </div>
+                <span class="text-emerald-700 font-bold">Verified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Receptionist -->
+      <div id="subtab-receptionist" class="staff-subview hidden space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+          <div class="liquid-glass-card rounded-2xl p-4">
+            <span class="text-slate-400 block text-[11px]">Today Expected Arrivals</span>
+            <span class="text-2xl font-bold text-slate-800">6 Guests</span>
+          </div>
+          <div class="liquid-glass-card rounded-2xl p-4">
+            <span class="text-slate-400 block text-[11px]">Today Expected Departures</span>
+            <span class="text-2xl font-bold text-slate-800">4 Guests</span>
+          </div>
+          <div class="liquid-glass-card rounded-2xl p-4">
+            <span class="text-slate-400 block text-[11px]">Shift Drawer Cash Balance</span>
+            <span class="text-2xl font-bold text-emerald-700">₹14,500</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Cleaner -->
+      <div id="subtab-cleaner" class="staff-subview hidden space-y-4">
+        <div class="liquid-glass-card rounded-2xl p-5 border-l-4 border-l-rose-500 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-base font-bold text-slate-900">Room 105 (Deluxe King)</span>
+            <span class="text-[10px] pill-rose font-bold px-2 py-0.5 rounded">Checked Out</span>
+          </div>
+          <p class="text-xs text-slate-500">Bed linen change, bathroom sanitization, replenishing water.</p>
+          <div class="pt-2 flex space-x-2">
+            <button onclick="showToast('Room 105 marked clean')" class="bg-emerald-600 text-white text-xs font-bold py-2 px-4 rounded-xl">✓ Mark Clean</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Student -->
+      <div id="subtab-student" class="staff-subview hidden space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="liquid-glass-card rounded-2xl p-5 space-y-2">
+            <div class="text-xs text-slate-400 font-medium">November Dues (Shree Ram PG)</div>
+            <div class="text-3xl font-extrabold text-slate-900">₹8,500</div>
+            <p class="text-xs text-slate-500">Rent ₹7,500 + Mess ₹1,000</p>
+            <button onclick="openRazorpayModal('Rahul Sharma', 8500, 'PG Rent Nov')" class="w-full bg-slate-900 text-white text-xs font-bold py-2.5 rounded-xl mt-2">
+              Pay via UPI
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: SUPABASE & RAZORPAY CONNECTORS (PRD 7 & 9) -->
+  <!-- ========================================================================= -->
+  <div id="connectorsModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="liquid-glass bg-white/95 rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-5 border border-white max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b pb-3">
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-xs">API</div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-base">Backend Connectors & API Configuration</h3>
+            <p class="text-xs text-slate-500">Live connectors for Supabase DB & Razorpay Payments</p>
+          </div>
+        </div>
+        <button onclick="closeModal('connectorsModal')" class="text-slate-400 hover:text-slate-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <!-- Supabase Section -->
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span class="font-bold text-slate-800 text-sm">Supabase PostgreSQL Connector</span>
+            </div>
+            <span id="supabaseStatusPill" class="text-[10px] font-bold pill-emerald px-2 py-0.5 rounded-full">Connector Active</span>
+          </div>
+          <div class="space-y-2">
+            <div>
+              <label class="block text-slate-500 text-[11px] mb-1 font-medium">NEXT_PUBLIC_SUPABASE_URL</label>
+              <input id="inputSupabaseUrl" type="text" value="https://nl-jaipur-demo.supabase.co" class="w-full text-xs font-mono bg-white border border-slate-200 rounded-lg p-2 focus:ring-1 focus:ring-slate-400">
+            </div>
+            <div>
+              <label class="block text-slate-500 text-[11px] mb-1 font-medium">NEXT_PUBLIC_SUPABASE_ANON_KEY</label>
+              <input id="inputSupabaseAnonKey" type="password" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sLWphaXB1ciIsInJvbGUiOiJhbm9uIn0" class="w-full text-xs font-mono bg-white border border-slate-200 rounded-lg p-2 focus:ring-1 focus:ring-slate-400">
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 pt-1">
+            <button onclick="testSupabaseConnection()" class="px-3 py-1.5 bg-slate-900 text-white rounded-lg font-bold text-[11px]">
+              Test Connection
+            </button>
+            <button onclick="downloadSchemaSQL()" class="px-3 py-1.5 bg-white border text-slate-700 rounded-lg font-semibold text-[11px] flex items-center">
+              <i data-lucide="file-code" class="w-3.5 h-3.5 mr-1"></i> Download schema.sql
+            </button>
+          </div>
+        </div>
+
+        <!-- Razorpay Section -->
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
+              <span class="font-bold text-slate-800 text-sm">Razorpay Payment Gateway</span>
+            </div>
+            <span id="razorpayStatusPill" class="text-[10px] font-bold pill-sky px-2 py-0.5 rounded-full">Test Sandbox Active</span>
+          </div>
+          <div class="space-y-2">
+            <div>
+              <label class="block text-slate-500 text-[11px] mb-1 font-medium">RAZORPAY_KEY_ID (Indian Gateway)</label>
+              <input id="inputRazorpayKey" type="text" value="rzp_test_JaipurNeura2026" class="w-full text-xs font-mono bg-white border border-slate-200 rounded-lg p-2 focus:ring-1 focus:ring-slate-400">
+            </div>
+            <div>
+              <label class="block text-slate-500 text-[11px] mb-1 font-medium">RAZORPAY_WEBHOOK_SECRET</label>
+              <input id="inputRazorpaySecret" type="password" value="whsec_JaipurWebhookSecret9012" class="w-full text-xs font-mono bg-white border border-slate-200 rounded-lg p-2 focus:ring-1 focus:ring-slate-400">
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 pt-1">
+            <button onclick="simulateWebhook()" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-bold text-[11px]">
+              Simulate Webhook (payment.captured)
+            </button>
+            <button onclick="openRazorpayModal('Test Customer', 100, 'Test Verification')" class="px-3 py-1.5 bg-white border text-slate-700 rounded-lg font-semibold text-[11px]">
+              Launch Test Checkout
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button onclick="saveConnectorSettings()" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-xl transition">
+          Save Connector Settings
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: RAZORPAY CHECKOUT INTERACTIVE MODAL -->
+  <!-- ========================================================================= -->
+  <div id="razorpayCheckoutModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="liquid-glass bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4 border border-white">
+      <div class="flex items-center justify-between border-b pb-3">
+        <div class="flex items-center space-x-2">
+          <div class="w-6 h-6 rounded-md bg-blue-600 flex items-center justify-center text-white font-black text-xs">R</div>
+          <span class="font-bold text-slate-900 text-sm">Razorpay Trusted</span>
+        </div>
+        <button onclick="closeModal('razorpayCheckoutModal')" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="text-center py-2">
+        <div class="text-xs text-slate-400 font-medium">Payment to Neura Living</div>
+        <div id="rzpAmountDisplay" class="text-3xl font-extrabold text-slate-900 mt-1">₹8,500.00</div>
+        <div id="rzpPurposeDisplay" class="text-[11px] text-slate-500 mt-0.5">PG Monthly Rent - Rahul Sharma</div>
+      </div>
+
+      <div class="space-y-2 text-xs">
+        <div onclick="selectPaymentMethod('upi')" class="p-3 rounded-xl border border-slate-200 hover:border-slate-400 cursor-pointer flex items-center justify-between bg-slate-50/50">
+          <div class="flex items-center space-x-2.5">
+            <i data-lucide="qr-code" class="w-4 h-4 text-emerald-600"></i>
+            <div>
+              <span class="font-bold text-slate-800">UPI (GPay, PhonePe, Paytm)</span>
+              <span class="block text-[10px] text-slate-400">Scan QR or enter UPI ID</span>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+        </div>
+
+        <div onclick="selectPaymentMethod('card')" class="p-3 rounded-xl border border-slate-200 hover:border-slate-400 cursor-pointer flex items-center justify-between bg-slate-50/50">
+          <div class="flex items-center space-x-2.5">
+            <i data-lucide="credit-card" class="w-4 h-4 text-sky-600"></i>
+            <div>
+              <span class="font-bold text-slate-800">Debit / Credit Cards</span>
+              <span class="block text-[10px] text-slate-400">Visa, Mastercard, RuPay</span>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+        </div>
+      </div>
+
+      <button onclick="confirmRazorpaySuccess()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-2.5 rounded-xl transition shadow">
+        Authorize & Pay Now
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: DEPOSIT REFUND CALCULATOR -->
+  <!-- ========================================================================= -->
+  <div id="depositRefundModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="liquid-glass bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 border border-white">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="font-bold text-slate-900 text-base">Student Exit & Deposit Refund Ledger</h3>
+        <button onclick="closeModal('depositRefundModal')" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-500 font-medium mb-1">Select Exiting Resident</label>
+          <select id="exitStudentSelect" onchange="calculateDepositRefund()" class="w-full p-2 border rounded-lg bg-slate-50 font-medium text-slate-800">
+            <option value="15000">Vikram Soni (Bed 204-A) - Deposit Held: ₹15,000</option>
+            <option value="12000">Karan Pareek (Bed 106-B) - Deposit Held: ₹12,000</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-500 font-medium mb-1">Pending Rent Dues (₹)</label>
+            <input id="inputPendingDues" type="number" value="1200" oninput="calculateDepositRefund()" class="w-full p-2 border rounded-lg">
+          </div>
+          <div>
+            <label class="block text-slate-500 font-medium mb-1">Room Damage / Painting (₹)</label>
+            <input id="inputDamages" type="number" value="800" oninput="calculateDepositRefund()" class="w-full p-2 border rounded-lg">
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 border space-y-2">
+          <div class="flex justify-between text-slate-600">
+            <span>Gross Deposit Captured:</span>
+            <span id="grossDepositVal" class="font-semibold">₹15,000</span>
+          </div>
+          <div class="flex justify-between text-rose-600">
+            <span>Less: Itemized Deductions:</span>
+            <span id="totalDeductionsVal" class="font-semibold">- ₹2,000</span>
+          </div>
+          <div class="pt-2 border-t flex justify-between text-sm font-bold text-slate-900">
+            <span>Net Refund Payable to Student:</span>
+            <span id="netRefundVal" class="text-emerald-600 text-base">₹13,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end space-x-2 pt-2">
+        <button onclick="closeModal('depositRefundModal')" class="px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
+        <button onclick="finalizeRefund()" class="px-4 py-2 text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white rounded-xl">
+          Approve & Issue Exit Receipt
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: HOTEL CHECK-IN MODAL -->
+  <!-- ========================================================================= -->
+  <div id="hotelCheckinModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="liquid-glass bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 border border-white">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="font-bold text-slate-900 text-base">Front Desk Walk-In Check-In</h3>
+        <button onclick="closeModal('hotelCheckinModal')" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-500 mb-1">Guest Full Name</label>
+          <input id="checkinName" type="text" placeholder="e.g. Rajesh Khanna" class="w-full p-2 border rounded-lg">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-500 mb-1">Phone Number</label>
+            <input id="checkinPhone" type="text" placeholder="+91 98..." class="w-full p-2 border rounded-lg">
+          </div>
+          <div>
+            <label class="block text-slate-500 mb-1">Select Room</label>
+            <select id="checkinRoom" class="w-full p-2 border rounded-lg bg-slate-50 font-semibold">
+              <option value="101">Room 101 (Deluxe)</option>
+              <option value="103">Room 103 (King)</option>
+              <option value="203">Room 203 (Suite)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-2">
+        <button onclick="closeModal('hotelCheckinModal')" class="px-3 py-2 text-xs font-medium text-slate-600">Cancel</button>
+        <button onclick="confirmHotelCheckin()" class="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-xl">
+          Confirm & Issue Key
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: GST TAX INVOICE GENERATOR -->
+  <!-- ========================================================================= -->
+  <div id="gstInvoiceModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="liquid-glass bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 border border-white">
+      <div class="flex items-center justify-between border-b pb-3">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="receipt" class="w-5 h-5 text-sky-600"></i>
+          <h3 class="font-bold text-slate-900 text-base">GST Tax Invoice Generator</h3>
+        </div>
+        <button onclick="closeModal('gstInvoiceModal')" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-4 rounded-xl bg-slate-50 border text-xs space-y-2">
+        <div class="flex justify-between font-bold text-slate-900">
+          <span>The Grand Rajputana Hotel (Jaipur)</span>
+          <span>GSTIN: 08AAAAA0000A1Z5</span>
+        </div>
+        <div class="text-[11px] text-slate-500">Invoice No: INV-2026-9021 • Date: 15 Nov 2026</div>
+        <hr class="my-2 border-slate-200">
+        <div class="flex justify-between">
+          <span>Room Charges (2 Nights @ ₹2,500):</span>
+          <span class="font-semibold">₹5,000.00</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Restaurant / Food Extras:</span>
+          <span class="font-semibold">₹750.00</span>
+        </div>
+        <div class="flex justify-between text-slate-600">
+          <span>CGST (6%):</span>
+          <span>₹345.00</span>
+        </div>
+        <div class="flex justify-between text-slate-600">
+          <span>SGST (6%):</span>
+          <span>₹345.00</span>
+        </div>
+        <div class="pt-2 border-t flex justify-between text-sm font-bold text-slate-900">
+          <span>Total Payable:</span>
+          <span class="text-emerald-700 font-extrabold text-base">₹6,440.00</span>
+        </div>
+      </div>
+
+      <div class="flex justify-end space-x-2">
+        <button onclick="showToast('Tax Invoice PDF generated successfully.')" class="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-xl">
+          Download Official PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- ACTION TOAST -->
+  <!-- ========================================================================= -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-2xl shadow-xl flex items-center space-x-2 transform translate-y-24 opacity-0 transition-all duration-300 z-50">
+    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toastMsg">Action completed successfully</span>
+  </div>
+
+  <!-- MINIMAL FOOTER -->
+  <footer class="mt-auto border-t border-slate-200/80 bg-white/40 py-4 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>Neura Living • Minimal Liquid Glass Property OS (Jaipur, India)</div>
+      <div class="flex space-x-4">
+        <a href="javascript:void(0)" onclick="switchView('landing')" class="hover:text-slate-800">Landing</a>
+        <a href="javascript:void(0)" onclick="requestAccess('superadmin')" class="hover:text-slate-800">Super Admin</a>
+        <a href="javascript:void(0)" onclick="openModal('connectorsModal')" class="hover:text-slate-800">Supabase & Razorpay</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC: AUTH GATING & ROLE ACCESS -->
+  <script>
+    // Authentication State
+    // currentUser: null | { role: 'owner' | 'superadmin' | 'warden' | 'receptionist' | 'cleaner' | 'student', name: string, propertyCode?: string }
+    let currentUser = null;
+    let pendingTargetView = null;
+    let currentView = 'landing';
+    let currentProperty = 'pg_1';
+    let isHindi = false;
+
+    // Simulated Bed Data for Hostel / PG
+    const sampleBeds = [
+      { id: '101-A', floor: 1, type: 'Double', student: 'Aman Verma', status: 'OCCUPIED', rent: 8000, due: 0 },
+      { id: '101-B', floor: 1, type: 'Double', student: 'Rohan Mehra', status: 'OCCUPIED', rent: 8000, due: 8000 },
+      { id: '102-A', floor: 1, type: 'Triple', student: 'Vikas S.', status: 'OCCUPIED', rent: 7000, due: 0 },
+      { id: '102-B', floor: 1, type: 'Triple', student: 'Nitin K.', status: 'OCCUPIED', rent: 7000, due: 0 },
+      { id: '102-C', floor: 1, type: 'Triple', student: null, status: 'VACANT', rent: 7000, due: 0 },
+      { id: '103-A', floor: 1, type: 'Single', student: 'Ayush G.', status: 'OCCUPIED', rent: 11000, due: 0 },
+      { id: '104-A', floor: 1, type: 'Double', student: 'Tarun B.', status: 'OCCUPIED', rent: 8500, due: 0 },
+      { id: '104-B', floor: 1, type: 'Double', student: 'Rahul Sharma', status: 'OCCUPIED', rent: 8500, due: 8500 },
+      { id: '105-A', floor: 1, type: 'Double', student: null, status: 'VACANT', rent: 8000, due: 0 },
+      { id: '105-B', floor: 1, type: 'Double', student: 'Karan P.', status: 'NOTICE', rent: 8000, due: 0 },
+      { id: '106-A', floor: 1, type: 'Triple', student: 'Manish R.', status: 'OCCUPIED', rent: 7000, due: 0 },
+      { id: '106-B', floor: 1, type: 'Triple', student: null, status: 'RESERVED', rent: 7000, due: 0 },
+      { id: '107-A', floor: 1, type: 'Double', student: 'Gaurav V.', status: 'OCCUPIED', rent: 8000, due: 0 },
+      { id: '107-B', floor: 1, type: 'Double', student: 'Deepak J.', status: 'OCCUPIED', rent: 8000, due: 0 },
+      { id: '108-A', floor: 1, type: 'Single', student: null, status: 'VACANT', rent: 10500, due: 0 },
+      { id: '108-B', floor: 1, type: 'Single', student: 'Siddharth M.', status: 'OCCUPIED', rent: 10500, due: 0 }
+    ];
+
+    // Simulated Hotel Rooms
+    const sampleHotelRooms = [
+      { num: '101', type: 'Deluxe', status: 'VACANT', guest: null, rate: 2200 },
+      { num: '102', type: 'Deluxe', status: 'OCCUPIED', guest: 'Amitabh Saxena', rate: 2700 },
+      { num: '103', type: 'King Suite', status: 'VACANT', guest: null, rate: 3400 },
+      { num: '104', type: 'Deluxe', status: 'OCCUPIED', guest: 'Priya Joshi', rate: 2500 },
+      { num: '105', type: 'King', status: 'DIRTY', guest: null, rate: 2800 },
+      { num: '106', type: 'Deluxe', status: 'OCCUPIED', guest: 'Mahesh K.', rate: 2200 },
+      { num: '201', type: 'Royal Suite', status: 'CLEANING', guest: null, rate: 4500 },
+      { num: '202', type: 'Royal Suite', status: 'OCCUPIED', guest: 'Dr. Sen', rate: 4500 },
+      { num: '203', type: 'Deluxe', status: 'VACANT', guest: null, rate: 2200 },
+      { num: '204', type: 'Deluxe', status: 'OCCUPIED', guest: 'Sarah Jenkins', rate: 3200 },
+      { num: '205', type: 'King', status: 'OCCUPIED', guest: 'Robert Davis', rate: 2800 },
+      { num: '206', type: 'Deluxe', status: 'DIRTY', guest: null, rate: 2200 }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderPGBeds(sampleBeds);
+      renderHotelRooms(sampleHotelRooms);
+      updateAuthUI();
+      switchView('landing');
+    });
+
+    // Permission Checking before switching surface
+    function requestAccess(targetView) {
+      // 1. Landing and Guest QR are public
+      if (targetView === 'landing' || targetView === 'guest_qr') {
+        switchView(targetView);
+        return;
+      }
+
+      // 2. If not logged in, prompt login gate for this persona!
+      if (!currentUser) {
+        pendingTargetView = targetView;
+        openAuthGateFor(targetView);
+        return;
+      }
+
+      // 3. If logged in, check role authorization:
+      // Super Admin can view Super Admin + all
+      if (currentUser.role === 'superadmin') {
+        switchView(targetView);
+        return;
+      }
+
+      // Owner can view Owner, PG, Hotel, Apartment, Staff
+      if (currentUser.role === 'owner') {
+        if (targetView === 'superadmin') {
+          showToast('Access Denied: Super Admin credentials required for Platform HQ.');
+          return;
+        }
+        switchView(targetView);
+        return;
+      }
+
+      // Staff roles
+      if (['warden', 'receptionist', 'cleaner', 'student'].includes(currentUser.role)) {
+        if (targetView === 'staff_matrix') {
+          switchView(targetView);
+          switchStaffSubTab(currentUser.role);
+          return;
+        }
+        if (currentUser.role === 'warden' && targetView === 'pg') {
+          switchView('pg');
+          return;
+        }
+        if (currentUser.role === 'receptionist' && targetView === 'hotel') {
+          switchView('hotel');
+          return;
+        }
+        showToast(`Access Denied: Logged in as ${currentUser.role.toUpperCase()}. You do not have permissions for ${targetView}.`);
+        return;
+      }
+
+      switchView(targetView);
+    }
+
+    // Auth Gate UI Logic
+    function openAuthGateFor(view) {
+      pendingTargetView = view;
+      const title = document.getElementById('authGateTitle');
+      const subtitle = document.getElementById('authGateSubtitle');
+
+      if (view === 'superadmin') {
+        title.innerText = 'Platform Super Admin Access';
+        subtitle.innerText = 'Sign in with your Platform Administrator ID & Key.';
+        setAuthMode('credentials');
+        document.getElementById('credPersonaSelect').value = 'superadmin';
+        applyCredPreset('superadmin');
+      } else if (view === 'owner' || view === 'apartment') {
+        title.innerText = 'Property Owner Sign In';
+        subtitle.innerText = 'Sign in with your Owner Account ID or Phone.';
+        setAuthMode('credentials');
+        document.getElementById('credPersonaSelect').value = 'owner';
+        applyCredPreset('owner');
+      } else if (view === 'pg') {
+        title.innerText = 'Hostel & PG Module Access';
+        subtitle.innerText = 'Sign in with your Hostel Property Code & Phone OTP, or Owner ID.';
+        setAuthMode('property_otp');
+        document.getElementById('staffPersonaSelect').value = 'warden';
+        applyStaffPreset('warden');
+      } else if (view === 'hotel') {
+        title.innerText = 'Hotel PMS & Front Desk Access';
+        subtitle.innerText = 'Sign in with your Hotel Property Code & Phone OTP, or Owner ID.';
+        setAuthMode('property_otp');
+        document.getElementById('staffPersonaSelect').value = 'receptionist';
+        applyStaffPreset('receptionist');
+      } else {
+        title.innerText = 'Staff & Member Authentication';
+        subtitle.innerText = 'Enter your assigned Property Code and registered Mobile Number.';
+        setAuthMode('property_otp');
+        document.getElementById('staffPersonaSelect').value = 'warden';
+        applyStaffPreset('warden');
+      }
+
+      switchView('auth_gate');
+    }
+
+    function openAuthModal(defaultRole) {
+      openAuthGateFor(defaultRole);
+    }
+
+    function setAuthMode(mode) {
+      const fCred = document.getElementById('formCredentials');
+      const fOtp = document.getElementById('formPropertyOtp');
+      const tCred = document.getElementById('authTabCredentials');
+      const tOtp = document.getElementById('authTabPropertyOtp');
+
+      if (mode === 'credentials') {
+        fCred.classList.remove('hidden');
+        fOtp.classList.add('hidden');
+        tCred.className = 'py-2 rounded-lg bg-white shadow-sm text-slate-900 font-bold transition';
+        tOtp.className = 'py-2 rounded-lg text-slate-500 hover:text-slate-900 font-medium transition';
+      } else {
+        fCred.classList.add('hidden');
+        fOtp.classList.remove('hidden');
+        tOtp.className = 'py-2 rounded-lg bg-white shadow-sm text-slate-900 font-bold transition';
+        tCred.className = 'py-2 rounded-lg text-slate-500 hover:text-slate-900 font-medium transition';
+      }
+    }
+
+    function applyCredPreset(type) {
+      const idInput = document.getElementById('inputCredId');
+      const passInput = document.getElementById('inputCredPassword');
+      if (type === 'superadmin') {
+        idInput.value = 'admin@neuraliving.com';
+        passInput.value = 'SuperAdmin@Jaipur99';
+      } else {
+        idInput.value = 'owner@shreeram.com';
+        passInput.value = 'OwnerPass@2026';
+      }
+    }
+
+    function applyStaffPreset(type) {
+      const codeInput = document.getElementById('inputPropertyCode');
+      const phoneInput = document.getElementById('inputStaffPhone');
+      const otpInput = document.getElementById('inputStaffOtp');
+
+      if (type === 'warden') {
+        codeInput.value = 'PG-SHREERAM-101';
+        phoneInput.value = '98290 12345';
+        otpInput.value = '7941';
+      } else if (type === 'receptionist') {
+        codeInput.value = 'HT-RAJPUTANA-201';
+        phoneInput.value = '94140 88210';
+        otpInput.value = '5512';
+      } else if (type === 'cleaner') {
+        codeInput.value = 'HT-RAJPUTANA-201';
+        phoneInput.value = '98281 99012';
+        otpInput.value = '3890';
+      } else if (type === 'student') {
+        codeInput.value = 'PG-SHREERAM-101';
+        phoneInput.value = '98290 88990';
+        otpInput.value = '4102';
+      }
+    }
+
+    function submitCredentialsLogin() {
+      const persona = document.getElementById('credPersonaSelect').value;
+      if (persona === 'superadmin') {
+        currentUser = {
+          role: 'superadmin',
+          name: 'Platform Super Admin',
+          id: 'admin@neuraliving.com'
+        };
+        showToast('Authenticated as Super Admin (Platform HQ)');
+        switchView(pendingTargetView || 'superadmin');
+      } else {
+        currentUser = {
+          role: 'owner',
+          name: 'Devendra Sharma',
+          id: 'owner@shreeram.com'
+        };
+        showToast('Welcome back, Devendra Sharma! (Property Owner)');
+        switchView(pendingTargetView || 'owner');
+      }
+      updateAuthUI();
+    }
+
+    function submitPropertyOtpLogin() {
+      const persona = document.getElementById('staffPersonaSelect').value;
+      const code = document.getElementById('inputPropertyCode').value;
+
+      const personas = {
+        warden: { name: 'Ram Singh (Warden)', role: 'warden', view: 'staff_matrix' },
+        receptionist: { name: 'Pooja Verma (Receptionist)', role: 'receptionist', view: 'staff_matrix' },
+        cleaner: { name: 'Mohan Lal (Housekeeping)', role: 'cleaner', view: 'staff_matrix' },
+        student: { name: 'Rahul Sharma (Student Bed 104-B)', role: 'student', view: 'staff_matrix' }
+      };
+
+      const selected = personas[persona] || personas.warden;
+      currentUser = {
+        role: selected.role,
+        name: selected.name,
+        propertyCode: code
+      };
+
+      showToast(`Verified OTP for Property ${code}! Welcome ${selected.name}`);
+      switchView('staff_matrix');
+      switchStaffSubTab(selected.role);
+      updateAuthUI();
+    }
+
+    function quickLoginAs(role) {
+      if (role === 'owner') {
+        currentUser = { role: 'owner', name: 'Devendra Sharma', id: 'owner@shreeram.com' };
+        showToast('Quick demo login as Property Owner');
+        switchView('owner');
+      } else if (role === 'superadmin') {
+        currentUser = { role: 'superadmin', name: 'Platform Super Admin', id: 'admin@neuraliving.com' };
+        showToast('Quick demo login as Super Admin');
+        switchView('superadmin');
+      } else if (role === 'warden') {
+        currentUser = { role: 'warden', name: 'Ram Singh (Warden)', propertyCode: 'PG-SHREERAM-101' };
+        showToast('Quick demo login as Warden');
+        switchView('staff_matrix');
+        switchStaffSubTab('warden');
+      } else if (role === 'receptionist') {
+        currentUser = { role: 'receptionist', name: 'Pooja Verma (Receptionist)', propertyCode: 'HT-RAJPUTANA-201' };
+        showToast('Quick demo login as Receptionist');
+        switchView('staff_matrix');
+        switchStaffSubTab('receptionist');
+      } else if (role === 'student') {
+        currentUser = { role: 'student', name: 'Rahul Sharma (Student)', propertyCode: 'PG-SHREERAM-101' };
+        showToast('Quick demo login as Student');
+        switchView('staff_matrix');
+        switchStaffSubTab('student');
+      }
+      updateAuthUI();
+    }
+
+    function logout() {
+      currentUser = null;
+      pendingTargetView = null;
+      updateAuthUI();
+      switchView('landing');
+      showToast('You have been signed out. All panels are locked.');
+    }
+
+    function updateAuthUI() {
+      const unauthBlock = document.getElementById('unauthNavBlock');
+      const authBlock = document.getElementById('authNavBlock');
+      const sessionPill = document.getElementById('sessionStatusPill');
+      const lockIcons = ['superadmin', 'owner', 'pg', 'hotel', 'apartment', 'staff_matrix'];
+
+      if (currentUser) {
+        unauthBlock.classList.add('hidden');
+        authBlock.classList.remove('hidden');
+        authBlock.classList.add('flex');
+
+        document.getElementById('userName').innerText = currentUser.name;
+        document.getElementById('userRoleBadge').innerText = currentUser.role.toUpperCase();
+        document.getElementById('userAvatar').innerText = currentUser.name[0];
+
+        sessionPill.className = 'font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md';
+        sessionPill.innerText = `🟢 Logged in as: ${currentUser.name} (${currentUser.role.toUpperCase()})`;
+
+        // Unlock icons
+        lockIcons.forEach(id => {
+          const el = document.getElementById(`lock-${id}`);
+          if (el) el.classList.add('hidden');
+        });
+      } else {
+        unauthBlock.classList.remove('hidden');
+        authBlock.classList.add('hidden');
+        authBlock.classList.remove('flex');
+
+        sessionPill.className = 'font-bold text-slate-700 bg-slate-200/70 px-2 py-0.5 rounded-md';
+        sessionPill.innerText = '🔒 Not Logged In (Public Guest Mode)';
+
+        // Lock icons visible
+        lockIcons.forEach(id => {
+          const el = document.getElementById(`lock-${id}`);
+          if (el) el.classList.remove('hidden');
+        });
+      }
+      lucide.createIcons();
+    }
+
+    // View Switcher
+    function switchView(view) {
+      currentView = view;
+      document.querySelectorAll('.surface-view').forEach(s => s.classList.add('hidden'));
+      const active = document.getElementById(`surface-${view}`);
+      if (active) active.classList.remove('hidden');
+
+      // Update Nav Tabs
+      document.querySelectorAll('.nav-tab').forEach(tab => {
+        if (tab.dataset.view === view) {
+          tab.className = 'nav-tab px-3 py-1.5 rounded-lg bg-white shadow-sm text-slate-900 font-bold flex items-center';
+        } else {
+          tab.className = 'nav-tab px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 font-medium flex items-center';
+        }
+      });
+
+      // Property Select Dropdown visibility
+      const propWrapper = document.getElementById('propertySelectWrapper');
+      if (currentUser && currentUser.role === 'owner' && ['owner', 'pg', 'hotel', 'apartment'].includes(view)) {
+        propWrapper.classList.remove('hidden');
+      } else {
+        propWrapper.classList.add('hidden');
+      }
+
+      lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchStaffSubTab(staffRole) {
+      document.querySelectorAll('.staff-subview').forEach(v => v.classList.add('hidden'));
+      const active = document.getElementById(`subtab-${staffRole}`);
+      if (active) active.classList.remove('hidden');
+
+      document.querySelectorAll('.staff-tab').forEach(t => {
+        if (t.dataset.staff === staffRole) {
+          t.className = 'staff-tab px-3 py-1.5 rounded-lg bg-white shadow-sm text-slate-900 font-bold';
+        } else {
+          t.className = 'staff-tab px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 font-medium';
+        }
+      });
+      lucide.createIcons();
+    }
+
+    function switchProperty(propId) {
+      currentProperty = propId;
+      if (propId === 'pg_1') switchView('pg');
+      else if (propId === 'hotel_1') switchView('hotel');
+      else if (propId === 'apt_1') switchView('apartment');
+      showToast(`Switched active context to ${propId.toUpperCase()}`);
+    }
+
+    // Render PG Beds
+    function renderPGBeds(beds) {
+      const container = document.getElementById('pgBedsGrid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      beds.forEach(bed => {
+        let statusBg = 'bg-white/80 border-slate-200 text-slate-700';
+        let statusBadge = 'pill-slate';
+        let statusLabel = 'Vacant';
+
+        if (bed.status === 'OCCUPIED') {
+          statusBg = 'bg-emerald-50/70 border-emerald-200/80 text-emerald-950';
+          statusBadge = 'pill-emerald';
+          statusLabel = 'Occupied';
+        } else if (bed.status === 'NOTICE') {
+          statusBg = 'bg-amber-50/70 border-amber-200/80 text-amber-950';
+          statusBadge = 'pill-amber';
+          statusLabel = 'Notice';
+        } else if (bed.status === 'RESERVED') {
+          statusBg = 'bg-sky-50/70 border-sky-200/80 text-sky-950';
+          statusBadge = 'pill-sky';
+          statusLabel = 'Reserved';
+        }
+
+        const card = document.createElement('div');
+        card.className = `liquid-glass-card rounded-xl p-3 border cursor-pointer ${statusBg}`;
+        card.onclick = () => openBedDetails(bed);
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-extrabold text-xs text-slate-900">${bed.id}</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full ${statusBadge}">${statusLabel}</span>
+          </div>
+          <div class="mt-2 text-[11px] truncate font-semibold text-slate-800">${bed.student || 'Available'}</div>
+          <div class="mt-1 flex items-center justify-between text-[10px] text-slate-500">
+            <span>₹${bed.rent}/m</span>
+            ${bed.due > 0 ? '<span class="text-rose-600 font-bold">Due</span>' : '<span class="text-emerald-700 font-bold">Paid</span>'}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterBeds(filter) {
+      document.querySelectorAll('.bed-filter-btn').forEach(btn => {
+        if (btn.dataset.filter === filter) {
+          btn.className = 'bed-filter-btn px-3 py-1 rounded-full bg-slate-800 text-white font-bold';
+        } else {
+          btn.className = 'bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border';
+        }
+      });
+
+      if (filter === 'ALL') {
+        renderPGBeds(sampleBeds);
+      } else {
+        renderPGBeds(sampleBeds.filter(b => b.status === filter));
+      }
+    }
+
+    function openBedDetails(bed) {
+      if (bed.student) {
+        if (bed.due > 0) {
+          openRazorpayModal(bed.student, bed.due, `Rent for Bed ${bed.id}`);
+        } else {
+          showToast(`Bed ${bed.id}: Occupied by ${bed.student}. All dues settled.`);
+        }
+      } else {
+        showToast(`Bed ${bed.id} is Vacant. Rent is ₹${bed.rent}/month. Ready for onboarding.`);
+      }
+    }
+
+    // Render Hotel Rooms
+    function renderHotelRooms(rooms) {
+      const container = document.getElementById('hotelRoomsGrid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      rooms.forEach(r => {
+        let badgeColor = 'pill-emerald';
+        let label = 'Ready';
+        let cardBg = 'bg-white/80 border-slate-200';
+
+        if (r.status === 'OCCUPIED') {
+          badgeColor = 'bg-slate-900 text-white';
+          label = 'Occupied';
+          cardBg = 'bg-slate-100/70 border-slate-300';
+        } else if (r.status === 'DIRTY') {
+          badgeColor = 'pill-rose';
+          label = 'Dirty';
+          cardBg = 'bg-rose-50/60 border-rose-200';
+        } else if (r.status === 'CLEANING') {
+          badgeColor = 'pill-sky';
+          label = 'Cleaning';
+          cardBg = 'bg-sky-50/60 border-sky-200';
+        }
+
+        const card = document.createElement('div');
+        card.className = `liquid-glass-card rounded-xl p-3 border cursor-pointer ${cardBg}`;
+        card.onclick = () => handleHotelRoomClick(r);
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-xs text-slate-900">Room ${r.num}</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded ${badgeColor}">${label}</span>
+          </div>
+          <div class="mt-2 text-[11px] text-slate-700 truncate font-semibold">${r.guest || r.type}</div>
+          <div class="mt-1 text-[10px] text-slate-400">₹${r.rate} / night</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function handleHotelRoomClick(room) {
+      if (room.status === 'OCCUPIED') {
+        openModal('gstInvoiceModal');
+        showToast(`Checkout modal opened for ${room.guest} in Room ${room.num}.`);
+      } else if (room.status === 'DIRTY') {
+        showToast(`Room ${room.num} is dirty. Cleaning task assigned.`);
+        room.status = 'CLEANING';
+        renderHotelRooms(sampleHotelRooms);
+      } else if (room.status === 'CLEANING') {
+        room.status = 'VACANT';
+        renderHotelRooms(sampleHotelRooms);
+        showToast(`Room ${room.num} marked clean and ready.`);
+      } else {
+        openModal('hotelCheckinModal');
+      }
+    }
+
+    // Razorpay Integration & Simulation
+    function openRazorpayModal(name, amount, purpose) {
+      document.getElementById('rzpAmountDisplay').innerText = `₹${amount.toLocaleString('en-IN')}.00`;
+      document.getElementById('rzpPurposeDisplay').innerText = `${purpose} • ${name}`;
+      openModal('razorpayCheckoutModal');
+    }
+
+    function selectPaymentMethod(method) {
+      showToast(`Selected ${method.toUpperCase()} payment mode. Processing...`);
+    }
+
+    function confirmRazorpaySuccess() {
+      closeModal('razorpayCheckoutModal');
+      showToast('🎉 Payment captured via Razorpay! Receipt generated & ledger updated.');
+      const rahul = sampleBeds.find(b => b.student === 'Rahul Sharma');
+      if (rahul) rahul.due = 0;
+      renderPGBeds(sampleBeds);
+    }
+
+    // Modals
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.remove('hidden');
+        lucide.createIcons();
+      }
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('hidden');
+    }
+
+    // Deposit Refund
+    function calculateDepositRefund() {
+      const gross = parseFloat(document.getElementById('exitStudentSelect').value) || 0;
+      const dues = parseFloat(document.getElementById('inputPendingDues').value) || 0;
+      const damages = parseFloat(document.getElementById('inputDamages').value) || 0;
+      const totalDeductions = dues + damages;
+      const net = Math.max(0, gross - totalDeductions);
+
+      document.getElementById('grossDepositVal').innerText = `₹${gross.toLocaleString('en-IN')}`;
+      document.getElementById('totalDeductionsVal').innerText = `- ₹${totalDeductions.toLocaleString('en-IN')}`;
+      document.getElementById('netRefundVal').innerText = `₹${net.toLocaleString('en-IN')}`;
+    }
+
+    function finalizeRefund() {
+      closeModal('depositRefundModal');
+      showToast('Deposit refund processed and logged in audit ledger.');
+    }
+
+    // Guest QR Actions
+    function submitGuestRequest() {
+      const input = document.getElementById('guestQueryInput');
+      if (!input.value.trim()) return;
+      document.getElementById('guestRequestStatus').classList.remove('hidden');
+      showToast(`Request "${input.value}" dispatched to front desk!`);
+      input.value = '';
+      setTimeout(() => {
+        document.getElementById('guestRequestStatus').classList.add('hidden');
+      }, 5000);
+    }
+
+    function toggleMobileView() {
+      const container = document.getElementById('guestPortalContainer');
+      const btn = document.getElementById('viewToggleBtn');
+      if (container.classList.contains('max-w-xl')) {
+        container.classList.remove('max-w-xl');
+        container.classList.add('max-w-xs', 'border-8', 'border-slate-800', 'rounded-[40px]');
+        btn.innerText = '💻 Full View';
+      } else {
+        container.classList.add('max-w-xl');
+        container.classList.remove('max-w-xs', 'border-8', 'border-slate-800', 'rounded-[40px]');
+        btn.innerText = '📱 Toggle Mobile Frame';
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toastMsg');
+      text.innerText = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3500);
+    }
+
+    function triggerAllReminders() {
+      showToast('🚀 WhatsApp reminders dispatched to 11 residents with direct UPI pay links!');
+    }
+
+    function sendTenantWhatsApp(name, amount) {
+      showToast(`WhatsApp reminder sent to ${name} for ₹${amount}.`);
+    }
+
+    function sendRenewalNotice(name, flat) {
+      showToast(`Renewal agreement draft sent to ${name} for ${flat}.`);
+    }
+
+    function confirmHotelCheckin() {
+      const name = document.getElementById('checkinName').value || 'Walk-In Guest';
+      const roomNum = document.getElementById('checkinRoom').value;
+      const target = sampleHotelRooms.find(r => r.num === roomNum);
+      if (target) {
+        target.status = 'OCCUPIED';
+        target.guest = name;
+      }
+      renderHotelRooms(sampleHotelRooms);
+      closeModal('hotelCheckinModal');
+      showToast(`Guest ${name} checked into Room ${roomNum}. Key card activated.`);
+    }
+
+    function resolveTicket(btn) {
+      btn.innerText = 'Resolved ✓';
+      btn.className = 'px-2 py-1 text-[11px] font-bold bg-emerald-100 text-emerald-800 rounded';
+      showToast('Complaint ticket marked resolved. SLA clock stopped.');
+    }
+
+    function toggleLang() {
+      isHindi = !isHindi;
+      document.getElementById('langBtn').innerText = isHindi ? 'EN' : 'हिंदी';
+      showToast(isHindi ? 'भाषा: हिंदी सक्रिय (Hindi UI Active)' : 'Language: English Active');
+    }
+
+    function testSupabaseConnection() {
+      showToast('Testing Supabase REST API endpoint... Connected! 12 tables verified.');
+    }
+
+    function downloadSchemaSQL() {
+      window.open('schema.sql', '_blank');
+      showToast('Downloading schema.sql for Supabase PostgreSQL...');
+    }
+
+    function simulateWebhook() {
+      showToast('Webhook event "payment.captured" received: ₹8,500 settled into account.');
+    }
+
+    function saveConnectorSettings() {
+      closeModal('connectorsModal');
+      showToast('Supabase & Razorpay connector settings saved!');
+    }
+
+    function exportCSV() {
+      showToast('Downloading consolidated financial & occupancy CSV export...');
+    }
+  </script>
+</body>
+</html>
