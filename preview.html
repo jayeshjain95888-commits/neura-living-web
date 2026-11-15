@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Neura Living | Unified Space Operating System</title>
   
-  <!-- Fonts -->
+  <!-- Fonts: Plus Jakarta Sans (UI), Noto Sans Devanagari (Hindi glyphs), JetBrains Mono (Numbers/Codes) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -24,7 +24,7 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans Devanagari"', 'system-ui', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
           },
         }
@@ -36,11 +36,11 @@
     /* Color Graded Plain Liquid Glass Finish */
     :root {
       --bg-base: #f8fafc;
-      --glass-surface: rgba(255, 255, 255, 0.72);
-      --glass-card: rgba(255, 255, 255, 0.84);
-      --glass-card-hover: rgba(255, 255, 255, 0.96);
-      --glass-border: rgba(255, 255, 255, 0.85);
-      --glass-shadow: 0 12px 36px -4px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.6);
+      --glass-surface: rgba(255, 255, 255, 0.74);
+      --glass-card: rgba(255, 255, 255, 0.86);
+      --glass-card-hover: rgba(255, 255, 255, 0.98);
+      --glass-border: rgba(255, 255, 255, 0.88);
+      --glass-shadow: 0 12px 36px -4px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.7);
       --glass-blur: blur(20px);
     }
 
@@ -78,22 +78,22 @@
     .liquid-glass-card:hover {
       background: var(--glass-card-hover);
       transform: translateY(-2px);
-      box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.07), 0 0 0 1px rgba(255, 255, 255, 0.95);
+      box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.95);
     }
 
     .liquid-glass-nav {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.86);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
     }
 
-    /* Subdued color grading pill badges */
-    .pill-slate { background: rgba(241, 245, 249, 0.8); color: #334155; border: 1px solid rgba(203, 213, 225, 0.6); }
-    .pill-emerald { background: rgba(236, 253, 245, 0.85); color: #065f46; border: 1px solid rgba(167, 243, 208, 0.6); }
-    .pill-amber { background: rgba(254, 243, 199, 0.85); color: #92400e; border: 1px solid rgba(253, 230, 138, 0.6); }
-    .pill-sky { background: rgba(240, 249, 255, 0.85); color: #075985; border: 1px solid rgba(186, 230, 253, 0.6); }
-    .pill-rose { background: rgba(255, 241, 242, 0.85); color: #9f1239; border: 1px solid rgba(254, 205, 211, 0.6); }
+    /* Subdued color grading pill badges with high contrast */
+    .pill-slate { background: rgba(241, 245, 249, 0.9); color: #1e293b; border: 1px solid rgba(203, 213, 225, 0.8); }
+    .pill-emerald { background: rgba(236, 253, 245, 0.9); color: #064e3b; border: 1px solid rgba(167, 243, 208, 0.8); }
+    .pill-amber { background: rgba(254, 243, 199, 0.9); color: #78350f; border: 1px solid rgba(253, 230, 138, 0.8); }
+    .pill-sky { background: rgba(240, 249, 255, 0.9); color: #0c4a6e; border: 1px solid rgba(186, 230, 253, 0.8); }
+    .pill-rose { background: rgba(255, 241, 242, 0.9); color: #881337; border: 1px solid rgba(254, 205, 211, 0.8); }
 
     /* Custom subtle scrollbar */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -113,6 +113,22 @@
 <body class="flex flex-col min-h-screen text-slate-800">
 
   <!-- ========================================================================= -->
+  <!-- DEMO ENVIRONMENT COMPLIANCE BANNER (Audit L-01, S-02) -->
+  <!-- ========================================================================= -->
+  <div class="bg-amber-500/10 border-b border-amber-500/20 px-4 py-1.5 text-[11px] text-amber-900 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-1 text-center sm:text-left">
+      <div class="flex items-center space-x-2">
+        <span class="font-bold uppercase tracking-wider text-[10px] bg-amber-200/80 text-amber-900 px-2 py-0.5 rounded">Pre-Launch Prototype v1.0</span>
+        <span>All business metrics & credentials below are simulated mock fixtures for demo evaluation.</span>
+      </div>
+      <div class="flex items-center space-x-3 text-[10px] font-semibold text-amber-800">
+        <span>🔒 Server Auth Sandbox</span>
+        <span>⚡ Razorpay Test Mode</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
   <!-- TOP GLOBAL NAVIGATION BAR -->
   <!-- ========================================================================= -->
   <header class="sticky top-0 z-40 liquid-glass-nav">
@@ -128,7 +144,7 @@
             <div>
               <div class="flex items-center space-x-1.5">
                 <span class="font-bold text-slate-900 text-base tracking-tight">Neura Living</span>
-                <span class="text-[9px] uppercase font-bold tracking-wider text-slate-600 bg-slate-100/90 border border-slate-200/80 px-2 py-0.5 rounded-full">Jaipur SaaS</span>
+                <span class="text-[9px] uppercase font-bold tracking-wider text-slate-600 bg-slate-100/90 border border-slate-200/80 px-2 py-0.5 rounded-full">Jaipur</span>
               </div>
               <span class="text-[10px] text-slate-400 block -mt-0.5">PGs • Hotels • Apartments</span>
             </div>
@@ -147,7 +163,7 @@
           </div>
         </div>
 
-        <!-- Center: Nav Tabs (With Lock Indicators for Protected Panels) -->
+        <!-- Center: Nav Tabs with Lock Indicators -->
         <nav class="hidden lg:flex items-center space-x-1 bg-slate-200/50 p-1 rounded-xl border border-slate-200/80 text-xs font-medium">
           <button onclick="requestAccess('landing')" class="nav-tab px-3 py-1.5 rounded-lg transition-all" data-view="landing">
             🌐 Landing
@@ -176,15 +192,14 @@
             📱 Guest QR
           </button>
           <button onclick="requestAccess('staff_matrix')" class="nav-tab px-3 py-1.5 rounded-lg transition-all flex items-center" data-view="staff_matrix">
-            <span>👥 Staff & Member</span>
+            <span>👥 Staff Views</span>
             <i id="lock-staff_matrix" data-lucide="lock" class="w-3 h-3 ml-1.5 text-slate-400"></i>
           </button>
         </nav>
 
-        <!-- Right Side: Session State / Login Trigger -->
+        <!-- Right Side: Connectors, Lang, Session State -->
         <div class="flex items-center space-x-2 sm:space-x-2.5">
           
-          <!-- Connectors Modal Trigger -->
           <button onclick="openModal('connectorsModal')" class="flex items-center space-x-1.5 text-xs font-semibold text-slate-700 bg-white/90 hover:bg-white border border-slate-200/90 px-2.5 py-1.5 rounded-xl shadow-sm transition">
             <span class="w-2 h-2 rounded-full bg-emerald-500 glow-dot"></span>
             <span class="hidden sm:inline">Connectors</span>
@@ -196,7 +211,7 @@
             हिंदी
           </button>
 
-          <!-- Unauthenticated Login Button -->
+          <!-- Unauthenticated Sign In Button -->
           <div id="unauthNavBlock">
             <button onclick="openAuthModal('owner')" class="flex items-center space-x-1.5 text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl shadow-sm transition">
               <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
@@ -209,7 +224,7 @@
             <div class="flex items-center space-x-2 bg-slate-100/90 border border-slate-200/80 px-2.5 py-1 rounded-xl text-xs">
               <div id="userAvatar" class="w-5 h-5 rounded-full bg-slate-900 text-white font-bold text-[10px] flex items-center justify-center">O</div>
               <div class="text-left leading-none">
-                <span id="userName" class="font-bold text-slate-800 block text-[11px]">Devendra Sharma</span>
+                <span id="userName" class="font-bold text-slate-800 block text-[11px]">Demo Owner</span>
                 <span id="userRoleBadge" class="text-[9px] font-semibold text-slate-500 uppercase">Owner</span>
               </div>
             </div>
@@ -231,10 +246,10 @@
         <span class="text-slate-400 font-medium">Session:</span>
         <span id="sessionStatusPill" class="font-bold text-slate-700 bg-slate-200/70 px-2 py-0.5 rounded-md">🔒 Not Logged In (Public Guest Mode)</span>
         <span class="text-slate-400 hidden sm:inline">•</span>
-        <span id="activeSurfaceDesc" class="text-slate-500 hidden sm:inline">Select a role to log in with Owner ID, Admin ID, or Property Code + Phone OTP.</span>
+        <span id="activeSurfaceDesc" class="text-slate-500 hidden sm:inline">Protected panels require authentication via Owner ID, Admin ID, or Property Code + OTP.</span>
       </div>
       <div class="flex items-center space-x-3 text-[11px] font-medium text-slate-500">
-        <span class="flex items-center text-emerald-700"><i data-lucide="check-circle" class="w-3 h-3 mr-1"></i> RBAC Gated</span>
+        <span class="flex items-center text-emerald-700"><i data-lucide="check-circle" class="w-3 h-3 mr-1"></i> RLS Tightened</span>
       </div>
     </div>
   </div>
@@ -247,12 +262,10 @@
 
     <!-- ======================================================================= -->
     <!-- SURFACE 0: AUTHENTICATION / LOGIN GATE SCREEN -->
-    <!-- (Appears dynamically when an unauthenticated user clicks any locked tab) -->
     <!-- ======================================================================= -->
     <div id="surface-auth_gate" class="surface-view hidden max-w-lg mx-auto space-y-6 py-6">
       <div class="liquid-glass rounded-3xl p-7 shadow-xl border border-white/90 space-y-5">
         
-        <!-- Login Header -->
         <div class="text-center pb-2 border-b border-slate-200/60">
           <div id="authGateIcon" class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center mx-auto mb-3 shadow">
             <i data-lucide="lock" class="w-6 h-6"></i>
@@ -282,13 +295,13 @@
           </div>
 
           <div>
-            <label class="block text-slate-500 font-semibold mb-1">User ID / Email / Phone</label>
-            <input id="inputCredId" type="text" value="owner@shreeram.com" class="w-full p-2.5 border border-slate-200 rounded-xl font-medium bg-white focus:ring-1 focus:ring-slate-400">
+            <label class="block text-slate-500 font-semibold mb-1">User ID / Email</label>
+            <input id="inputCredId" type="text" value="owner@example-demo.in" class="w-full p-2.5 border border-slate-200 rounded-xl font-medium bg-white focus:ring-1 focus:ring-slate-400">
           </div>
 
           <div>
             <label class="block text-slate-500 font-semibold mb-1">Secret Password</label>
-            <input id="inputCredPassword" type="password" value="OwnerPass@2026" class="w-full p-2.5 border border-slate-200 rounded-xl font-medium bg-white focus:ring-1 focus:ring-slate-400">
+            <input id="inputCredPassword" type="password" value="••••••••••••" class="w-full p-2.5 border border-slate-200 rounded-xl font-medium bg-white focus:ring-1 focus:ring-slate-400">
           </div>
 
           <button onclick="submitCredentialsLogin()" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs transition shadow flex items-center justify-center">
@@ -297,7 +310,7 @@
           </button>
         </div>
 
-        <!-- FORM 2: Staff & Members (Property Code + Mobile Number + OTP) -->
+        <!-- FORM 2: Staff & Members (Property Code + Mobile Number + 6-Digit OTP) -->
         <div id="formPropertyOtp" class="space-y-4 text-xs hidden">
           <div>
             <label class="block text-slate-500 font-semibold mb-1">Select Staff / Member Persona</label>
@@ -310,23 +323,25 @@
           </div>
 
           <div>
-            <label class="block text-slate-500 font-semibold mb-1">PG / Hotel / Flat Property Code</label>
+            <label class="block text-slate-500 font-semibold mb-1">Property Code</label>
             <input id="inputPropertyCode" type="text" value="PG-SHREERAM-101" placeholder="e.g. PG-SHREERAM-101" class="w-full p-2.5 border border-slate-200 rounded-xl font-mono uppercase font-bold text-slate-900 bg-white focus:ring-1 focus:ring-slate-400">
-            <span class="text-[10px] text-slate-400 mt-0.5 block">Provided by your property owner or front desk register.</span>
           </div>
 
           <div>
             <label class="block text-slate-500 font-semibold mb-1">Registered Mobile Number</label>
             <div class="flex space-x-2">
               <span class="bg-slate-100 border border-slate-200 px-3 py-2.5 rounded-xl font-bold text-slate-700">+91</span>
-              <input id="inputStaffPhone" type="text" value="98290 12345" class="flex-1 p-2.5 border border-slate-200 rounded-xl font-medium bg-white focus:ring-1 focus:ring-slate-400">
+              <input id="inputStaffPhone" type="text" value="98000 00001" class="flex-1 p-2.5 border border-slate-200 rounded-xl font-medium bg-white focus:ring-1 focus:ring-slate-400">
             </div>
           </div>
 
           <div>
-            <label class="block text-slate-500 font-semibold mb-1">Mobile OTP (Auto-dispatched via SMS)</label>
-            <input id="inputStaffOtp" type="text" value="7941" maxlength="4" class="w-full p-2.5 border border-slate-200 rounded-xl font-mono text-center tracking-widest text-lg font-bold bg-white">
-            <span class="text-[10px] text-emerald-700 font-medium mt-0.5 block">✓ Demo OTP 7941 verified.</span>
+            <div class="flex justify-between items-center mb-1">
+              <label class="text-slate-500 font-semibold">6-Digit Secure Mobile OTP (Audit S-05)</label>
+              <span id="otpCooldownTimer" class="text-[10px] text-slate-400">Resend in 48s</span>
+            </div>
+            <input id="inputStaffOtp" type="text" value="849201" maxlength="6" class="w-full p-2.5 border border-slate-200 rounded-xl font-mono text-center tracking-widest text-lg font-bold bg-white">
+            <span class="text-[10px] text-emerald-700 font-medium mt-0.5 block">✓ Demo OTP 849201 simulated. Real SMS via TRAI DLT provider.</span>
           </div>
 
           <button onclick="submitPropertyOtpLogin()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition shadow flex items-center justify-center">
@@ -337,7 +352,7 @@
 
         <!-- Quick 1-Click Persona Shortcuts -->
         <div class="pt-4 border-t border-slate-200/60 text-center">
-          <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-2">Instant 1-Click Test Personas</span>
+          <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-2">Instant Demo Evaluation Shortcuts</span>
           <div class="flex flex-wrap justify-center gap-1.5 text-[11px] font-semibold">
             <button onclick="quickLoginAs('owner')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-800">👑 Owner</button>
             <button onclick="quickLoginAs('superadmin')" class="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 rounded-lg text-purple-800">🛡️ Super Admin</button>
@@ -352,15 +367,15 @@
 
 
     <!-- ======================================================================= -->
-    <!-- SURFACE 1: PRODUCT LANDING PAGE (Publicly Accessible) -->
+    <!-- SURFACE 1: PRODUCT LANDING PAGE -->
     <!-- ======================================================================= -->
     <div id="surface-landing" class="surface-view space-y-12">
       
-      <!-- Hero Section with Minimal Liquid Glass Card -->
+      <!-- Hero Section -->
       <section class="liquid-glass rounded-3xl p-8 sm:p-12 text-center space-y-6 relative overflow-hidden">
         <div class="inline-flex items-center space-x-2 bg-slate-100/90 border border-slate-200/80 px-3.5 py-1 rounded-full text-xs font-semibold text-slate-700">
           <span class="w-2 h-2 rounded-full bg-emerald-500 glow-dot"></span>
-          <span>Jaipur Pilot Open • 100+ Properties Onboarding</span>
+          <span>Jaipur Pilot Target • 100+ Properties Roadmap</span>
         </div>
 
         <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight max-w-4xl mx-auto leading-tight">
@@ -386,15 +401,14 @@
           </button>
         </div>
 
-        <!-- 30-min onboarding promise pill -->
         <div class="pt-4 flex items-center justify-center space-x-6 text-xs text-slate-500">
           <span class="flex items-center"><i data-lucide="clock" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> Setup in &lt; 30 mins</span>
           <span class="flex items-center"><i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> Free CSV migration</span>
-          <span class="flex items-center"><i data-lucide="message-circle" class="w-3.5 h-3.5 mr-1 text-emerald-600"></i> WhatsApp-first</span>
+          <span class="flex items-center"><i data-lucide="shield-check" class="w-3.5 h-3.5 mr-1 text-emerald-600"></i> DPDP Compliant</span>
         </div>
       </section>
 
-      <!-- Pain vs Solution Comparison (PRD Section 1 Table) -->
+      <!-- Pain vs Solution Comparison (PRD Section 1) -->
       <section class="space-y-4">
         <div class="text-center max-w-xl mx-auto">
           <span class="text-xs font-bold uppercase tracking-wider text-slate-400">The Shared Pain Solved</span>
@@ -437,7 +451,7 @@
               </div>
               <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-emerald-950">
                 <span class="font-bold block mb-0.5">What Neura Living Does:</span>
-                Role-based staff access, live room board, direct booking page, cleaner task list, QR guest portal, digital bills.
+                Role-based staff access, live room board, direct booking page, cleaner task list, QR guest portal, GST bills.
               </div>
             </div>
             <button onclick="requestAccess('hotel')" class="w-full text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 py-2 rounded-xl transition flex items-center justify-center">
@@ -470,12 +484,12 @@
         </div>
       </section>
 
-      <!-- SaaS Pricing Plans (PRD Section 12) -->
+      <!-- SaaS Pricing Plans (Audit L-15, M-05: Taxes & Terms clearly stated) -->
       <section class="liquid-glass rounded-3xl p-8 space-y-6">
         <div class="text-center max-w-xl mx-auto">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Fair & Transparent Pricing</span>
-          <h2 class="text-2xl font-bold text-slate-900 mt-1">Simple SaaS Plans for Property Owners</h2>
-          <p class="text-xs text-slate-500">Only the owner pays. Staff logins & guest QR web pages are included free.</p>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Transparent Pricing</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Simple SaaS Subscription Plans</h2>
+          <p class="text-xs text-slate-500">Billed monthly per active unit. Applicable 18% GST added at checkout. Staff accounts & QR guest pages included free.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -483,8 +497,8 @@
           <div class="liquid-glass-card rounded-2xl p-6 space-y-4">
             <div>
               <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Starter Plan</span>
-              <div class="text-3xl font-extrabold text-slate-900 mt-1">₹49 <span class="text-xs font-normal text-slate-400">/ bed or room / mo</span></div>
-              <p class="text-xs text-slate-500 mt-1">For single small PG, guest house, or flat cluster.</p>
+              <div class="text-3xl font-extrabold text-slate-900 mt-1">₹49 <span class="text-xs font-normal text-slate-400">+ 18% GST / bed or room / mo</span></div>
+              <p class="text-xs text-slate-500 mt-1">For single small PG, guest house, or flat cluster (min 15 units).</p>
             </div>
             <ul class="text-xs text-slate-600 space-y-2 pt-2 border-t border-slate-100">
               <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Up to 30 beds/rooms</li>
@@ -500,11 +514,11 @@
 
           <!-- Growth (Featured) -->
           <div class="liquid-glass-card rounded-2xl p-6 space-y-4 border-2 border-slate-900 relative">
-            <span class="absolute -top-3 right-4 bg-slate-900 text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full">Most Popular</span>
+            <span class="absolute -top-3 right-4 bg-slate-900 text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full">Volume Tier (50+ Units)</span>
             <div>
               <span class="text-xs font-bold text-indigo-700 uppercase tracking-wide">Growth Plan</span>
-              <div class="text-3xl font-extrabold text-slate-900 mt-1">₹39 <span class="text-xs font-normal text-slate-400">/ bed or room / mo</span></div>
-              <p class="text-xs text-slate-500 mt-1">For owners managing multiple properties & staff.</p>
+              <div class="text-3xl font-extrabold text-slate-900 mt-1">₹39 <span class="text-xs font-normal text-slate-400">+ 18% GST / bed or room / mo</span></div>
+              <p class="text-xs text-slate-500 mt-1">For operators managing multiple properties & staff (volume discount for 50+ units).</p>
             </div>
             <ul class="text-xs text-slate-600 space-y-2 pt-2 border-t border-slate-100">
               <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Multi-Property consolidation</li>
@@ -521,13 +535,13 @@
           <!-- Pro -->
           <div class="liquid-glass-card rounded-2xl p-6 space-y-4">
             <div>
-              <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Pro / Hotel Prime</span>
-              <div class="text-3xl font-extrabold text-slate-900 mt-1">₹59 <span class="text-xs font-normal text-slate-400">/ room / mo</span></div>
-              <p class="text-xs text-slate-500 mt-1">For larger boutique hotels with online booking & GST.</p>
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Pro Hotel PMS</span>
+              <div class="text-3xl font-extrabold text-slate-900 mt-1">₹59 <span class="text-xs font-normal text-slate-400">+ 18% GST / room / mo</span></div>
+              <p class="text-xs text-slate-500 mt-1">For hotels with direct online bookings & GST invoicing.</p>
             </div>
             <ul class="text-xs text-slate-600 space-y-2 pt-2 border-t border-slate-100">
               <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Direct Online Booking engine</li>
-              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> GST Invoicing & tax reports</li>
+              <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Compliant GST Invoicing & tax reports</li>
               <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Shift Cash Drawer handover audit</li>
               <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mr-2"></i> Dedicated account manager in Jaipur</li>
             </ul>
@@ -542,20 +556,19 @@
 
 
     <!-- ======================================================================= -->
-    <!-- SURFACE 2: SUPER ADMIN PANEL (Requires Super Admin Login) -->
+    <!-- SURFACE 2: SUPER ADMIN PANEL (Audit L-01 Labeling, S-07 Audit Logging) -->
     <!-- ======================================================================= -->
     <div id="surface-superadmin" class="surface-view hidden space-y-6">
       
-      <!-- Super Admin Header -->
       <div class="liquid-glass rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center space-x-2">
             <span class="text-xs font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full">Neura Living HQ</span>
             <span class="text-xs text-slate-400">•</span>
-            <span class="text-xs text-slate-500">Jaipur Deployment Region</span>
+            <span class="text-[10px] font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded">[SIMULATED DEMO METRICS]</span>
           </div>
           <h2 class="text-xl font-extrabold text-slate-900 mt-1">Platform Super Admin Console</h2>
-          <p class="text-xs text-slate-500">Authenticated as: <span class="font-bold text-slate-800">admin@neuraliving.com</span></p>
+          <p class="text-xs text-slate-500">Authenticated Session: <span class="font-bold text-slate-800 font-mono">admin@neuraliving.com</span> (Audit logging enabled)</p>
         </div>
         <div class="flex items-center space-x-2">
           <button onclick="showToast('Onboard organization wizard opened')" class="text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-2 rounded-xl shadow transition flex items-center">
@@ -567,24 +580,24 @@
         </div>
       </div>
 
-      <!-- SaaS Key Metrics -->
+      <!-- SaaS Pilot Target Metrics -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="liquid-glass-card rounded-2xl p-5">
           <div class="text-xs text-slate-500 font-medium flex items-center justify-between">
-            <span>Paying Properties (Jaipur)</span>
+            <span>Jaipur Target Properties</span>
             <i data-lucide="building-2" class="w-4 h-4 text-purple-600"></i>
           </div>
           <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">112 / 100</div>
-          <div class="text-[11px] text-emerald-600 font-semibold mt-1">✓ Goal exceeded for Phase 4</div>
+          <div class="text-[11px] text-emerald-700 font-bold mt-1">✓ Goal benchmark achieved</div>
         </div>
 
         <div class="liquid-glass-card rounded-2xl p-5">
           <div class="text-xs text-slate-500 font-medium flex items-center justify-between">
-            <span>Platform Monthly MRR</span>
+            <span>Projected Monthly MRR</span>
             <i data-lucide="indian-rupee" class="w-4 h-4 text-emerald-600"></i>
           </div>
           <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">₹2,84,600</div>
-          <div class="text-[11px] text-slate-500 mt-1">Avg ₹2,541 / property</div>
+          <div class="text-[11px] text-slate-500 mt-1">Simulated model aggregate</div>
         </div>
 
         <div class="liquid-glass-card rounded-2xl p-5">
@@ -598,18 +611,21 @@
 
         <div class="liquid-glass-card rounded-2xl p-5">
           <div class="text-xs text-slate-500 font-medium flex items-center justify-between">
-            <span>Monthly Logo Churn</span>
+            <span>Simulated Churn Rate</span>
             <i data-lucide="shield-check" class="w-4 h-4 text-teal-600"></i>
           </div>
           <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">1.8%</div>
-          <div class="text-[11px] text-emerald-600 font-semibold mt-1">Target is &lt; 4%</div>
+          <div class="text-[11px] text-emerald-700 font-bold mt-1">Within &lt; 4% safety boundary</div>
         </div>
       </div>
 
-      <!-- Tenants Table -->
+      <!-- Tenants Table with Audit Logging for Impersonation -->
       <div class="liquid-glass rounded-2xl p-5 space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <h3 class="font-bold text-slate-900 text-sm">Tenant Organizations & Subscription Status</h3>
+          <div>
+            <h3 class="font-bold text-slate-900 text-sm">Tenant Organizations & Subscription Status</h3>
+            <span class="text-[11px] text-slate-400">Impersonation actions are strictly recorded to security audit logs (Audit S-07).</span>
+          </div>
           <input type="text" placeholder="Search by owner name, city, phone..." class="text-xs bg-white border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-slate-400 w-full sm:w-64">
         </div>
 
@@ -630,7 +646,7 @@
               <tr class="hover:bg-white/50">
                 <td class="p-2.5 font-bold text-slate-900">
                   Devendra Sharma
-                  <span class="block text-[10px] font-normal text-slate-400">+91 98290 44102 • Jaipur</span>
+                  <span class="block text-[10px] font-normal text-slate-400">+91 98000 00001 • Jaipur</span>
                 </td>
                 <td class="p-2.5">
                   <span class="font-medium text-slate-800">3 Properties</span>
@@ -641,8 +657,8 @@
                 <td class="p-2.5 font-semibold text-slate-900">₹6,318/mo</td>
                 <td class="p-2.5"><span class="text-emerald-700 font-bold">Active</span></td>
                 <td class="p-2.5 text-right">
-                  <button onclick="quickLoginAs('owner')" class="text-[11px] font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 px-2.5 py-1 rounded-lg">
-                    Impersonate
+                  <button onclick="impersonateOwner('Devendra Sharma')" class="text-[11px] font-bold text-indigo-700 hover:text-indigo-900 bg-indigo-50 px-2.5 py-1 rounded-lg">
+                    Impersonate (Audited)
                   </button>
                 </td>
               </tr>
@@ -654,10 +670,19 @@
 
 
     <!-- ======================================================================= -->
-    <!-- SURFACE 3: OWNER CONSOLE (Requires Owner Login) -->
+    <!-- SURFACE 3: OWNER CONSOLE -->
     <!-- ======================================================================= -->
     <div id="surface-owner" class="surface-view hidden space-y-6">
       
+      <!-- Impersonation Banner if active -->
+      <div id="impersonationBanner" class="hidden bg-indigo-50 border border-indigo-200 p-2.5 rounded-xl text-xs text-indigo-900 flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="eye" class="w-4 h-4 text-indigo-700"></i>
+          <span>Super Admin Impersonation Session Active: Viewing as <strong>Devendra Sharma</strong>. Sensitive actions are read-only.</span>
+        </div>
+        <button onclick="exitImpersonation()" class="text-[11px] font-bold bg-indigo-600 text-white px-2 py-1 rounded-lg">Exit Impersonation</button>
+      </div>
+
       <!-- Top Metrics Row -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="liquid-glass-card rounded-2xl p-5">
@@ -760,7 +785,7 @@
                 <span class="text-[10px] uppercase font-bold tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">Hotel & Suites</span>
                 <h3 class="text-base font-bold text-slate-900 mt-2 group-hover:text-amber-600 transition-colors">The Grand Rajputana</h3>
                 <p class="text-xs text-slate-500">Mansarovar, Jaipur</p>
-                <div class="mt-1 text-[11px] font-mono text-slate-400">Code: <span class="text-slate-800 font-bold">HT-RAJPUTANA-201</span></div>
+                <div class="mt-1 text-[11px] font-mono text-slate-400">Slug: <span class="text-slate-800 font-bold">jaipur-grand</span></div>
               </div>
               <div class="p-2.5 bg-amber-50 rounded-xl text-amber-600 group-hover:scale-110 transition-transform">
                 <i data-lucide="hotel" class="w-5 h-5"></i>
@@ -817,7 +842,7 @@
 
 
     <!-- ======================================================================= -->
-    <!-- SURFACE 4: HOSTEL / PG MODULE (Requires Owner or Warden Login) -->
+    <!-- SURFACE 4: HOSTEL / PG MODULE (Audit DS-05: Non-color status indicators) -->
     <!-- ======================================================================= -->
     <div id="surface-pg" class="surface-view hidden space-y-6">
       
@@ -843,14 +868,22 @@
         </div>
       </div>
 
-      <!-- Live Bed Status Filter Chips -->
+      <!-- Live Bed Status Filter Chips with Icons (Audit DS-05, A-02) -->
       <div class="flex flex-wrap items-center gap-2 text-xs">
         <span class="text-slate-500 font-medium">Filter Beds:</span>
         <button onclick="filterBeds('ALL')" class="bed-filter-btn px-3 py-1 rounded-full bg-slate-800 text-white font-bold" data-filter="ALL">All (120)</button>
-        <button onclick="filterBeds('OCCUPIED')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border" data-filter="OCCUPIED">🟢 Occupied (106)</button>
-        <button onclick="filterBeds('VACANT')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border" data-filter="VACANT">⚪ Vacant (9)</button>
-        <button onclick="filterBeds('NOTICE')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border" data-filter="NOTICE">🟡 Notice Period (3)</button>
-        <button onclick="filterBeds('RESERVED')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border" data-filter="RESERVED">🔵 Reserved (2)</button>
+        <button onclick="filterBeds('OCCUPIED')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border flex items-center" data-filter="OCCUPIED">
+          <span class="w-2 h-2 rounded-full bg-emerald-600 mr-1.5"></span> [●] Occupied (106)
+        </button>
+        <button onclick="filterBeds('VACANT')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border flex items-center" data-filter="VACANT">
+          <span class="w-2 h-2 rounded-full border border-slate-400 mr-1.5"></span> [○] Vacant (9)
+        </button>
+        <button onclick="filterBeds('NOTICE')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border flex items-center" data-filter="NOTICE">
+          <span class="w-2 h-2 rounded-full bg-amber-500 mr-1.5"></span> [▲] Notice (3)
+        </button>
+        <button onclick="filterBeds('RESERVED')" class="bed-filter-btn px-3 py-1 rounded-full bg-white text-slate-700 hover:bg-slate-100 font-semibold border flex items-center" data-filter="RESERVED">
+          <span class="w-2 h-2 rounded-full bg-sky-500 mr-1.5"></span> [■] Reserved (2)
+        </button>
       </div>
 
       <!-- Interactive Bed Map Grid -->
@@ -864,76 +897,28 @@
         </div>
       </div>
 
-      <!-- Mess Menu & Complaints -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="liquid-glass rounded-2xl p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-slate-900">Weekly Mess Menu</h3>
-            <button onclick="showToast('Menu editor opened')" class="text-xs font-semibold text-slate-700 bg-white hover:bg-slate-100 border px-2.5 py-1 rounded-lg">Edit Menu</button>
-          </div>
-          <div class="space-y-2 text-xs">
-            <div class="p-2.5 rounded-xl bg-white/70 border border-slate-100 flex justify-between items-center">
-              <div>
-                <span class="font-bold text-slate-800">Breakfast (7:30 - 9:30 AM)</span>
-                <p class="text-slate-500">Aloo Paratha, Curd, Pickle, Tea / Coffee</p>
-              </div>
-              <span class="text-[10px] pill-emerald font-bold px-2 py-0.5 rounded">Active Today</span>
-            </div>
-            <div class="p-2.5 rounded-xl bg-white/70 border border-slate-100 flex justify-between items-center">
-              <div>
-                <span class="font-bold text-slate-800">Dinner (8:00 - 10:00 PM)</span>
-                <p class="text-slate-500">Paneer Butter Masala, Dal Tadka, Roti, Gulab Jamun</p>
-              </div>
-              <span class="text-[10px] pill-slate font-medium px-2 py-0.5 rounded">Special</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="liquid-glass rounded-2xl p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-slate-900">Student Complaints & SLA</h3>
-            <button onclick="openModal('newTicketModal')" class="text-xs font-semibold text-slate-700 bg-white hover:bg-slate-100 border px-2.5 py-1 rounded-lg">+ New Ticket</button>
-          </div>
-          <div class="space-y-2.5 text-xs">
-            <div class="p-3 rounded-xl bg-white/70 border border-slate-100 flex items-center justify-between">
-              <div>
-                <div class="flex items-center space-x-2">
-                  <span class="font-bold text-slate-800">Room 104 – WiFi router reboot needed</span>
-                  <span class="text-[10px] pill-rose font-bold px-1.5 py-0.5 rounded">Open</span>
-                </div>
-                <div class="text-[11px] text-slate-400 mt-0.5">Rahul Sharma • 45 mins ago</div>
-              </div>
-              <button onclick="resolveTicket(this)" class="px-2 py-1 text-[11px] font-semibold bg-slate-100 hover:bg-emerald-100 hover:text-emerald-800 rounded transition">
-                Resolve
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
 
 
     <!-- ======================================================================= -->
-    <!-- SURFACE 5: HOTEL PMS MODULE (Requires Owner or Receptionist Login) -->
+    <!-- SURFACE 5: HOTEL PMS MODULE (Audit HT-5 & L-03: Real GST Tiers) -->
     <!-- ======================================================================= -->
     <div id="surface-hotel" class="surface-view hidden space-y-6">
       
-      <!-- Hotel Subheader -->
       <div class="liquid-glass rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center space-x-2">
             <h2 class="text-lg font-bold text-slate-900">The Grand Rajputana – Hotel Management & Room Board</h2>
-            <span class="text-xs font-mono font-bold bg-amber-50 text-amber-800 px-2 py-0.5 rounded-full">HT-RAJPUTANA-201</span>
+            <span class="text-xs font-mono font-bold bg-amber-50 text-amber-800 px-2 py-0.5 rounded-full">GSTIN: 08AAAAA0000A1Z5</span>
           </div>
-          <p class="text-xs text-slate-500 mt-1">Live room status, walk-in check-in, GST billing, and QR direct booking engine.</p>
+          <p class="text-xs text-slate-500 mt-1">Live room status, walk-in check-in, GST rationalized billing (5%/12%/18% slabs), and QR booking engine.</p>
         </div>
         <div class="flex flex-wrap items-center gap-2">
           <button onclick="openModal('hotelCheckinModal')" class="text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white px-3 py-2 rounded-xl shadow-sm transition flex items-center">
             <i data-lucide="log-in" class="w-3.5 h-3.5 mr-1.5"></i> New Check-In
           </button>
-          <button onclick="openModal('gstInvoiceModal')" class="text-xs font-bold bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 px-3 py-2 rounded-xl shadow-sm transition flex items-center">
-            <i data-lucide="receipt" class="w-3.5 h-3.5 mr-1.5 text-sky-600"></i> GST Invoice
+          <button onclick="openGstInvoiceFor('Room 102', 'Amitabh Saxena', 2700, 2, 750)" class="text-xs font-bold bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 px-3 py-2 rounded-xl shadow-sm transition flex items-center">
+            <i data-lucide="receipt" class="w-3.5 h-3.5 mr-1.5 text-sky-600"></i> GST Invoice Generator
           </button>
           <button onclick="switchView('guest_qr')" class="text-xs font-bold bg-amber-500 hover:bg-amber-600 text-white px-3 py-2 rounded-xl shadow-sm transition flex items-center">
             <i data-lucide="qr-code" class="w-3.5 h-3.5 mr-1.5"></i> Guest QR View
@@ -941,7 +926,7 @@
         </div>
       </div>
 
-      <!-- Room Board -->
+      <!-- Room Board with Accessible Text Labels -->
       <div class="liquid-glass rounded-2xl p-5 space-y-4">
         <div class="flex items-center justify-between">
           <h3 class="font-bold text-slate-800 text-sm">Interactive Room Status Board</h3>
@@ -956,11 +941,9 @@
 
 
     <!-- ======================================================================= -->
-    <!-- SURFACE 6: APARTMENT / RENTAL MODULE (Requires Owner Login) -->
+    <!-- SURFACE 6: APARTMENT / RENTAL MODULE -->
     <!-- ======================================================================= -->
     <div id="surface-apartment" class="surface-view hidden space-y-6">
-      
-      <!-- Apartment Subheader -->
       <div class="liquid-glass rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center space-x-2">
@@ -985,7 +968,9 @@
               <span class="text-xs font-bold text-slate-900">Flat 101 (3BHK Deluxe)</span>
               <p class="text-[11px] text-slate-500">Tenant: Dr. Alok Mathur</p>
             </div>
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold pill-emerald">Occupied</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold pill-emerald flex items-center">
+              <i data-lucide="check" class="w-3 h-3 mr-1"></i> Occupied
+            </span>
           </div>
           <div class="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs">
             <div>
@@ -1020,7 +1005,9 @@
               <span class="text-xs font-bold text-slate-900">Flat 202 (2BHK)</span>
               <p class="text-[11px] text-slate-500">Tenant: Neha Agrawal</p>
             </div>
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold pill-amber">⚠️ 22 Days Left</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold pill-amber flex items-center">
+              <i data-lucide="alert-triangle" class="w-3 h-3 mr-1"></i> 22 Days Left
+            </span>
           </div>
           <div class="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs">
             <div>
@@ -1042,16 +1029,15 @@
           </div>
         </div>
       </div>
-
     </div>
 
 
     <!-- ======================================================================= -->
-    <!-- SURFACE 7: HOTEL QR GUEST WEB PORTAL (Publicly Accessible with Mobile OTP) -->
+    <!-- SURFACE 7: HOTEL QR GUEST WEB PORTAL (Audit B-01, B-02, DS-08) -->
     <!-- ======================================================================= -->
     <div id="surface-guest_qr" class="surface-view hidden space-y-6">
       
-      <!-- QR Explanation Banner -->
+      <!-- Canonical Slug & URL Bar -->
       <div class="liquid-glass rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
         <div class="flex items-center space-x-3">
           <div class="p-2.5 bg-amber-100 text-amber-800 rounded-xl">
@@ -1059,10 +1045,10 @@
           </div>
           <div>
             <span class="font-bold text-slate-900 text-sm">QR Code Mobile Guest Web Page</span>
-            <p class="text-slate-500">Hotel Code: <span class="font-mono text-slate-900 font-bold">HT-RAJPUTANA-201</span> • Zero app install required</p>
+            <p class="text-slate-500">Canonical Slug: <span class="font-mono text-slate-900 font-bold">/h/jaipur-grand</span> (Hotel: The Grand Rajputana • Zero app install)</p>
           </div>
         </div>
-        <div class="flex items-center space-x-2">
+        <div class="hidden md:flex items-center space-x-2">
           <button onclick="toggleMobileView()" id="viewToggleBtn" class="bg-white hover:bg-slate-50 border px-3 py-1.5 rounded-lg font-semibold text-slate-700 shadow-sm">
             📱 Toggle Mobile Frame
           </button>
@@ -1079,19 +1065,19 @@
         </div>
 
         <div class="grid grid-cols-2 gap-3">
-          <button onclick="showToast('Room booking opened')" class="p-4 rounded-2xl bg-white/80 border border-slate-200 hover:bg-white text-left transition shadow-sm group">
+          <button onclick="openModal('guestBookingModal')" class="p-4 rounded-2xl bg-white/80 border border-slate-200 hover:bg-white text-left transition shadow-sm group">
             <i data-lucide="calendar" class="w-5 h-5 text-amber-600 mb-2 group-hover:scale-110 transition-transform"></i>
             <div class="text-xs font-bold text-slate-800">Book Next Stay</div>
             <div class="text-[10px] text-slate-400">Direct rate • No OTA fee</div>
           </button>
 
-          <button onclick="showToast('Room service menu opened')" class="p-4 rounded-2xl bg-white/80 border border-slate-200 hover:bg-white text-left transition shadow-sm group">
+          <button onclick="openModal('roomServiceModal')" class="p-4 rounded-2xl bg-white/80 border border-slate-200 hover:bg-white text-left transition shadow-sm group">
             <i data-lucide="coffee" class="w-5 h-5 text-indigo-600 mb-2 group-hover:scale-110 transition-transform"></i>
             <div class="text-xs font-bold text-slate-800">Room Service & Menu</div>
             <div class="text-[10px] text-slate-400">Food, tea, towels, laundry</div>
           </button>
 
-          <button onclick="showToast('Hotel rules & WiFi password shown')" class="p-4 rounded-2xl bg-white/80 border border-slate-200 hover:bg-white text-left transition shadow-sm group">
+          <button onclick="openModal('hotelRulesModal')" class="p-4 rounded-2xl bg-white/80 border border-slate-200 hover:bg-white text-left transition shadow-sm group">
             <i data-lucide="file-text" class="w-5 h-5 text-sky-600 mb-2 group-hover:scale-110 transition-transform"></i>
             <div class="text-xs font-bold text-slate-800">Hotel Rules & WiFi</div>
             <div class="text-[10px] text-slate-400">Pass: Rajputana@2026</div>
@@ -1127,11 +1113,10 @@
 
 
     <!-- ======================================================================= -->
-    <!-- SURFACE 8: ROLE-BASED STAFF & STUDENT VIEWS (Requires Scoped Login) -->
+    <!-- SURFACE 8: ROLE-BASED STAFF & STUDENT VIEWS -->
     <!-- ======================================================================= -->
     <div id="surface-staff_matrix" class="surface-view hidden space-y-6">
       
-      <!-- Sub-Role Selector Tabs -->
       <div class="liquid-glass rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 class="text-base font-bold text-slate-900">Staff & Member Portal</h2>
@@ -1162,7 +1147,7 @@
               <div class="p-2.5 rounded-xl bg-white/70 border border-slate-100 flex items-center justify-between">
                 <div>
                   <span class="font-bold text-slate-800">Bed 101-A • Aman Verma</span>
-                  <div class="text-[11px] text-slate-400">98290 11223</div>
+                  <div class="text-[11px] text-slate-400">Phone: 98000 00001</div>
                 </div>
                 <button class="px-2 py-1 bg-emerald-100 text-emerald-800 rounded font-bold text-[11px]">Present</button>
               </div>
@@ -1246,7 +1231,128 @@
 
 
   <!-- ========================================================================= -->
-  <!-- MODAL: SUPABASE & RAZORPAY CONNECTORS (PRD 7 & 9) -->
+  <!-- MODAL: GST TAX INVOICE GENERATOR (Audit L-03, L-04: Slabs & SAC Codes) -->
+  <!-- ========================================================================= -->
+  <div id="gstInvoiceModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="liquid-glass bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 border border-white max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b pb-3">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="receipt" class="w-5 h-5 text-sky-600"></i>
+          <div>
+            <h3 class="font-bold text-slate-900 text-base">GST Tax Invoice</h3>
+            <span class="text-[10px] text-slate-400">Sequential Series: FY 2026-27 (Rule 46 Compliant)</span>
+          </div>
+        </div>
+        <button onclick="closeModal('gstInvoiceModal')" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-4 rounded-xl bg-slate-50 border text-xs space-y-2.5">
+        <div class="flex justify-between font-bold text-slate-900 border-b pb-2">
+          <div>
+            <span class="block text-sm">The Grand Rajputana Hotel</span>
+            <span class="text-[10px] font-mono text-slate-500">GSTIN: 08AAAAA0000A1Z5 • State: 08 Rajasthan</span>
+          </div>
+          <div class="text-right">
+            <span id="invNumberDisplay" class="font-mono text-slate-900 block font-bold">INV-2026-00412</span>
+            <span class="text-[10px] text-slate-400">Date: 15 Nov 2026</span>
+          </div>
+        </div>
+
+        <div class="text-[11px] text-slate-600">
+          <strong>Billed To:</strong> <span id="invGuestName">Amitabh Saxena</span> • POS: Rajasthan (Intra-State Supply)
+        </div>
+
+        <table class="w-full text-left text-[11px]">
+          <thead class="border-b text-slate-400">
+            <tr>
+              <th class="py-1">Description</th>
+              <th class="py-1">SAC</th>
+              <th class="py-1">Taxable</th>
+              <th class="py-1 text-right">Tax Rate</th>
+              <th class="py-1 text-right">Amount</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200/60" id="invLineItems">
+            <!-- Populated dynamically via calculateCompliantGst() -->
+          </tbody>
+        </table>
+
+        <div class="pt-2 border-t space-y-1 text-slate-600" id="invTaxBreakdown">
+          <!-- CGST / SGST breakdown -->
+        </div>
+
+        <div class="pt-2 border-t flex justify-between text-sm font-bold text-slate-900">
+          <span>Total Invoice Value:</span>
+          <span id="invTotalValue" class="text-emerald-700 font-extrabold text-base">₹0.00</span>
+        </div>
+      </div>
+
+      <div class="flex justify-end space-x-2">
+        <button onclick="printOrDownloadInvoice()" class="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-xl shadow flex items-center">
+          <i data-lucide="printer" class="w-3.5 h-3.5 mr-1.5"></i> Print / Download Tax Invoice
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: PRIVACY POLICY & DPDP ACT NOTICE (Audit L-05, L-06) -->
+  <!-- ========================================================================= -->
+  <div id="privacyPolicyModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="liquid-glass bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-4 border border-white max-h-[85vh] overflow-y-auto text-xs text-slate-600">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="font-bold text-slate-900 text-base">Privacy Policy & DPDP Act (2023) Notice</h3>
+        <button onclick="closeModal('privacyPolicyModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      <div class="space-y-3 leading-relaxed">
+        <p><strong>1. Data Fiduciary & Identity:</strong> Neura Living operates as a cloud-based property operating system under applicable laws of India. For grievances, contact our Grievance Officer at <code>grievance@neuraliving.com</code>, Civil Lines, Jaipur, Rajasthan.</p>
+        <p><strong>2. Lawful Basis & Purpose Limitation:</strong> In accordance with the Digital Personal Data Protection Act, 2023 (DPDP Act), we collect guest & resident details solely for hotel guest registers (Form C/Local police reporting), rent dues, and billing.</p>
+        <p><strong>3. Masked ID Storage:</strong> We do NOT store unmasked Aadhaar numbers. Only government-approved masked identifiers (last 4 digits) or encrypted identity tokens are retained.</p>
+        <p><strong>4. Principal Rights:</strong> You have the right to request access to, correction of, or erasure of your personal data upon completion of your statutory tenancy or hotel stay retention period.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: TERMS OF SERVICE (Audit L-05) -->
+  <!-- ========================================================================= -->
+  <div id="termsModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="liquid-glass bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-4 border border-white max-h-[85vh] overflow-y-auto text-xs text-slate-600">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="font-bold text-slate-900 text-base">Terms of Service & Property Software Agreement</h3>
+        <button onclick="closeModal('termsModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      <div class="space-y-3 leading-relaxed">
+        <p><strong>1. SaaS Subscription:</strong> Neura Living provides property management software to property owners on a monthly subscription basis. Subscriptions are billed per registered room, bed, or flat.</p>
+        <p><strong>2. Payment Processing:</strong> Payments are processed via PCI-DSS compliant gateways (Razorpay). Neura Living does not store credit/debit card credentials directly.</p>
+        <p><strong>3. Tenant & Staff Conduct:</strong> Property owners are responsible for maintaining accurate registers and collecting proper local tenant/guest verification as mandated by Rajasthan state municipal laws.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: CANCELLATION & REFUND POLICY (Audit L-05, L-16) -->
+  <!-- ========================================================================= -->
+  <div id="refundPolicyModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="liquid-glass bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-4 border border-white max-h-[85vh] overflow-y-auto text-xs text-slate-600">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="font-bold text-slate-900 text-base">Cancellation & Refund Policy</h3>
+        <button onclick="closeModal('refundPolicyModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      <div class="space-y-3 leading-relaxed">
+        <p><strong>1. Hotel Direct Bookings:</strong> Free cancellation is available up to 48 hours prior to standard check-in time (14:00 IST). Cancellations within 48 hours are subject to a 1-night retention fee.</p>
+        <p><strong>2. Hostel / PG Security Deposits:</strong> Deposit refunds are computed at exit following room inspection. Deductions for unpaid rent or itemized damage are recorded in the immutable exit ledger.</p>
+        <p><strong>3. SaaS Subscription:</strong> Property owners can cancel their monthly SaaS subscription at any time. Refunds are processed within 5-7 business days to the original payment source.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: SUPABASE & RAZORPAY CONNECTORS (PRD 7 & 9, Audit S-09, S-10, S-11) -->
   <!-- ========================================================================= -->
   <div id="connectorsModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="liquid-glass bg-white/95 rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-5 border border-white max-h-[90vh] overflow-y-auto">
@@ -1269,9 +1375,9 @@
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-              <span class="font-bold text-slate-800 text-sm">Supabase PostgreSQL Connector</span>
+              <span class="font-bold text-slate-800 text-sm">Supabase PostgreSQL 15 Connector</span>
             </div>
-            <span id="supabaseStatusPill" class="text-[10px] font-bold pill-emerald px-2 py-0.5 rounded-full">Connector Active</span>
+            <span id="supabaseStatusPill" class="text-[10px] font-bold pill-emerald px-2 py-0.5 rounded-full">Client Anon Key Only</span>
           </div>
           <div class="space-y-2">
             <div>
@@ -1279,8 +1385,8 @@
               <input id="inputSupabaseUrl" type="text" value="https://nl-jaipur-demo.supabase.co" class="w-full text-xs font-mono bg-white border border-slate-200 rounded-lg p-2 focus:ring-1 focus:ring-slate-400">
             </div>
             <div>
-              <label class="block text-slate-500 text-[11px] mb-1 font-medium">NEXT_PUBLIC_SUPABASE_ANON_KEY</label>
-              <input id="inputSupabaseAnonKey" type="password" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sLWphaXB1ciIsInJvbGUiOiJhbm9uIn0" class="w-full text-xs font-mono bg-white border border-slate-200 rounded-lg p-2 focus:ring-1 focus:ring-slate-400">
+              <label class="block text-slate-500 text-[11px] mb-1 font-medium">NEXT_PUBLIC_SUPABASE_ANON_KEY (Public only - service_role kept server-side)</label>
+              <input id="inputSupabaseAnonKey" type="password" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.anon_public_key_fixture" class="w-full text-xs font-mono bg-white border border-slate-200 rounded-lg p-2 focus:ring-1 focus:ring-slate-400">
             </div>
           </div>
           <div class="flex items-center space-x-2 pt-1">
@@ -1298,26 +1404,23 @@
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
-              <span class="font-bold text-slate-800 text-sm">Razorpay Payment Gateway</span>
+              <span class="font-bold text-slate-800 text-sm">Razorpay Payment Gateway (Indian Gateway)</span>
             </div>
-            <span id="razorpayStatusPill" class="text-[10px] font-bold pill-sky px-2 py-0.5 rounded-full">Test Sandbox Active</span>
+            <span id="razorpayStatusPill" class="text-[10px] font-bold pill-sky px-2 py-0.5 rounded-full">Test Mode Active</span>
           </div>
           <div class="space-y-2">
             <div>
-              <label class="block text-slate-500 text-[11px] mb-1 font-medium">RAZORPAY_KEY_ID (Indian Gateway)</label>
+              <label class="block text-slate-500 text-[11px] mb-1 font-medium">RAZORPAY_KEY_ID (Client Public Key)</label>
               <input id="inputRazorpayKey" type="text" value="rzp_test_JaipurNeura2026" class="w-full text-xs font-mono bg-white border border-slate-200 rounded-lg p-2 focus:ring-1 focus:ring-slate-400">
             </div>
-            <div>
-              <label class="block text-slate-500 text-[11px] mb-1 font-medium">RAZORPAY_WEBHOOK_SECRET</label>
-              <input id="inputRazorpaySecret" type="password" value="whsec_JaipurWebhookSecret9012" class="w-full text-xs font-mono bg-white border border-slate-200 rounded-lg p-2 focus:ring-1 focus:ring-slate-400">
-            </div>
+            <p class="text-[10px] text-slate-400">Security Note (Audit S-09): The Razorpay Secret is kept exclusively in server environment variables for webhook HMAC-SHA256 signature verification.</p>
           </div>
           <div class="flex items-center space-x-2 pt-1">
             <button onclick="simulateWebhook()" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-bold text-[11px]">
-              Simulate Webhook (payment.captured)
+              Simulate Verified Webhook (payment.captured)
             </button>
             <button onclick="openRazorpayModal('Test Customer', 100, 'Test Verification')" class="px-3 py-1.5 bg-white border text-slate-700 rounded-lg font-semibold text-[11px]">
-              Launch Test Checkout
+              Launch Checkout Modal
             </button>
           </div>
         </div>
@@ -1348,7 +1451,7 @@
       </div>
 
       <div class="text-center py-2">
-        <div class="text-xs text-slate-400 font-medium">Payment to Neura Living</div>
+        <div class="text-xs text-slate-400 font-medium">Payment to Neura Living Property</div>
         <div id="rzpAmountDisplay" class="text-3xl font-extrabold text-slate-900 mt-1">₹8,500.00</div>
         <div id="rzpPurposeDisplay" class="text-[11px] text-slate-500 mt-0.5">PG Monthly Rent - Rahul Sharma</div>
       </div>
@@ -1443,7 +1546,7 @@
 
 
   <!-- ========================================================================= -->
-  <!-- MODAL: HOTEL CHECK-IN MODAL -->
+  <!-- MODAL: HOTEL CHECK-IN MODAL (Audit L-06, L-07: Masked ID + DPDP Consent) -->
   <!-- ========================================================================= -->
   <div id="hotelCheckinModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="liquid-glass bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 border border-white">
@@ -1455,81 +1558,47 @@
       </div>
       <div class="space-y-3 text-xs">
         <div>
-          <label class="block text-slate-500 mb-1">Guest Full Name</label>
+          <label class="block text-slate-500 mb-1 font-semibold">Guest Full Name</label>
           <input id="checkinName" type="text" placeholder="e.g. Rajesh Khanna" class="w-full p-2 border rounded-lg">
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-slate-500 mb-1">Phone Number</label>
-            <input id="checkinPhone" type="text" placeholder="+91 98..." class="w-full p-2 border rounded-lg">
+            <label class="block text-slate-500 mb-1 font-semibold">Phone Number</label>
+            <input id="checkinPhone" type="text" placeholder="+91 98000 00000" class="w-full p-2 border rounded-lg">
           </div>
           <div>
-            <label class="block text-slate-500 mb-1">Select Room</label>
+            <label class="block text-slate-500 mb-1 font-semibold">Select Room</label>
             <select id="checkinRoom" class="w-full p-2 border rounded-lg bg-slate-50 font-semibold">
-              <option value="101">Room 101 (Deluxe)</option>
-              <option value="103">Room 103 (King)</option>
-              <option value="203">Room 203 (Suite)</option>
+              <option value="101">Room 101 (Deluxe - ₹2,200)</option>
+              <option value="103">Room 103 (King Suite - ₹3,400)</option>
+              <option value="203">Room 203 (Deluxe - ₹2,200)</option>
             </select>
           </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-500 mb-1 font-semibold">ID Proof Type</label>
+            <select class="w-full p-2 border rounded-lg bg-slate-50">
+              <option>Passport</option>
+              <option>Driving License</option>
+              <option>Voter ID</option>
+              <option>Aadhaar (Masked)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-500 mb-1 font-semibold">Last 4 Digits Only (DPDP)</label>
+            <input type="text" placeholder="•••• 4819" maxlength="4" class="w-full p-2 border rounded-lg font-mono">
+          </div>
+        </div>
+        <div class="flex items-start space-x-2 pt-1">
+          <input type="checkbox" id="dpdpConsentCheck" checked class="mt-0.5 rounded text-slate-900 focus:ring-slate-400">
+          <label for="dpdpConsentCheck" class="text-[11px] text-slate-500">Guest explicit DPDP consent captured for statutory registration & billing.</label>
         </div>
       </div>
       <div class="flex justify-end space-x-2 pt-2">
         <button onclick="closeModal('hotelCheckinModal')" class="px-3 py-2 text-xs font-medium text-slate-600">Cancel</button>
         <button onclick="confirmHotelCheckin()" class="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-xl">
-          Confirm & Issue Key
-        </button>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ========================================================================= -->
-  <!-- MODAL: GST TAX INVOICE GENERATOR -->
-  <!-- ========================================================================= -->
-  <div id="gstInvoiceModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="liquid-glass bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 border border-white">
-      <div class="flex items-center justify-between border-b pb-3">
-        <div class="flex items-center space-x-2">
-          <i data-lucide="receipt" class="w-5 h-5 text-sky-600"></i>
-          <h3 class="font-bold text-slate-900 text-base">GST Tax Invoice Generator</h3>
-        </div>
-        <button onclick="closeModal('gstInvoiceModal')" class="text-slate-400 hover:text-slate-600">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-
-      <div class="p-4 rounded-xl bg-slate-50 border text-xs space-y-2">
-        <div class="flex justify-between font-bold text-slate-900">
-          <span>The Grand Rajputana Hotel (Jaipur)</span>
-          <span>GSTIN: 08AAAAA0000A1Z5</span>
-        </div>
-        <div class="text-[11px] text-slate-500">Invoice No: INV-2026-9021 • Date: 15 Nov 2026</div>
-        <hr class="my-2 border-slate-200">
-        <div class="flex justify-between">
-          <span>Room Charges (2 Nights @ ₹2,500):</span>
-          <span class="font-semibold">₹5,000.00</span>
-        </div>
-        <div class="flex justify-between">
-          <span>Restaurant / Food Extras:</span>
-          <span class="font-semibold">₹750.00</span>
-        </div>
-        <div class="flex justify-between text-slate-600">
-          <span>CGST (6%):</span>
-          <span>₹345.00</span>
-        </div>
-        <div class="flex justify-between text-slate-600">
-          <span>SGST (6%):</span>
-          <span>₹345.00</span>
-        </div>
-        <div class="pt-2 border-t flex justify-between text-sm font-bold text-slate-900">
-          <span>Total Payable:</span>
-          <span class="text-emerald-700 font-extrabold text-base">₹6,440.00</span>
-        </div>
-      </div>
-
-      <div class="flex justify-end space-x-2">
-        <button onclick="showToast('Tax Invoice PDF generated successfully.')" class="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-xl">
-          Download Official PDF
+          Confirm Check-In & Issue Key
         </button>
       </div>
     </div>
@@ -1544,22 +1613,29 @@
     <span id="toastMsg">Action completed successfully</span>
   </div>
 
-  <!-- MINIMAL FOOTER -->
-  <footer class="mt-auto border-t border-slate-200/80 bg-white/40 py-4 text-center text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <div>Neura Living • Minimal Liquid Glass Property OS (Jaipur, India)</div>
-      <div class="flex space-x-4">
-        <a href="javascript:void(0)" onclick="switchView('landing')" class="hover:text-slate-800">Landing</a>
-        <a href="javascript:void(0)" onclick="requestAccess('superadmin')" class="hover:text-slate-800">Super Admin</a>
-        <a href="javascript:void(0)" onclick="openModal('connectorsModal')" class="hover:text-slate-800">Supabase & Razorpay</a>
+  <!-- MINIMAL COMPLIANT FOOTER (Audit L-05, L-17) -->
+  <footer class="mt-auto border-t border-slate-200/80 bg-white/60 py-6 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 space-y-3">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center space-x-2">
+          <span class="font-bold text-slate-800">Neura Living Platform</span>
+          <span>• Registered Office: Civil Lines, Jaipur, Rajasthan 302006</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-4 text-slate-600 font-medium">
+          <a href="javascript:void(0)" onclick="openModal('privacyPolicyModal')" class="hover:text-slate-900 underline">Privacy Policy (DPDP)</a>
+          <a href="javascript:void(0)" onclick="openModal('termsModal')" class="hover:text-slate-900 underline">Terms of Service</a>
+          <a href="javascript:void(0)" onclick="openModal('refundPolicyModal')" class="hover:text-slate-900 underline">Cancellation & Refunds</a>
+          <a href="javascript:void(0)" onclick="showToast('Support: support@neuraliving.com | +91 141 2200112')" class="hover:text-slate-900">Contact & Support</a>
+        </div>
+      </div>
+      <div class="text-[11px] text-slate-400 text-center sm:text-left">
+        © 2026 Neura Living Technologies. All rights reserved. GSTIN: 08AAAAA0000A1Z5. Made for Indian Space Operators.
       </div>
     </div>
   </footer>
 
-  <!-- SCRIPT LOGIC: AUTH GATING & ROLE ACCESS -->
+  <!-- SCRIPT LOGIC: COMPLETE AUDIT REFINEMENTS -->
   <script>
-    // Authentication State
-    // currentUser: null | { role: 'owner' | 'superadmin' | 'warden' | 'receptionist' | 'cleaner' | 'student', name: string, propertyCode?: string }
     let currentUser = null;
     let pendingTargetView = null;
     let currentView = 'landing';
@@ -1594,8 +1670,8 @@
       { num: '104', type: 'Deluxe', status: 'OCCUPIED', guest: 'Priya Joshi', rate: 2500 },
       { num: '105', type: 'King', status: 'DIRTY', guest: null, rate: 2800 },
       { num: '106', type: 'Deluxe', status: 'OCCUPIED', guest: 'Mahesh K.', rate: 2200 },
-      { num: '201', type: 'Royal Suite', status: 'CLEANING', guest: null, rate: 4500 },
-      { num: '202', type: 'Royal Suite', status: 'OCCUPIED', guest: 'Dr. Sen', rate: 4500 },
+      { num: '201', type: 'Royal Suite', status: 'CLEANING', guest: null, rate: 8200 },
+      { num: '202', type: 'Royal Suite', status: 'OCCUPIED', guest: 'Dr. Sen', rate: 8200 },
       { num: '203', type: 'Deluxe', status: 'VACANT', guest: null, rate: 2200 },
       { num: '204', type: 'Deluxe', status: 'OCCUPIED', guest: 'Sarah Jenkins', rate: 3200 },
       { num: '205', type: 'King', status: 'OCCUPIED', guest: 'Robert Davis', rate: 2800 },
@@ -1607,32 +1683,34 @@
       renderPGBeds(sampleBeds);
       renderHotelRooms(sampleHotelRooms);
       updateAuthUI();
-      switchView('landing');
+      
+      // Hash / Slug routing support (Audit B-01, B-02)
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'guest/jaipur-grand' || hash === 'guest_qr') {
+        switchView('guest_qr');
+      } else {
+        switchView('landing');
+      }
     });
 
     // Permission Checking before switching surface
     function requestAccess(targetView) {
-      // 1. Landing and Guest QR are public
       if (targetView === 'landing' || targetView === 'guest_qr') {
         switchView(targetView);
         return;
       }
 
-      // 2. If not logged in, prompt login gate for this persona!
       if (!currentUser) {
         pendingTargetView = targetView;
         openAuthGateFor(targetView);
         return;
       }
 
-      // 3. If logged in, check role authorization:
-      // Super Admin can view Super Admin + all
       if (currentUser.role === 'superadmin') {
         switchView(targetView);
         return;
       }
 
-      // Owner can view Owner, PG, Hotel, Apartment, Staff
       if (currentUser.role === 'owner') {
         if (targetView === 'superadmin') {
           showToast('Access Denied: Super Admin credentials required for Platform HQ.');
@@ -1642,7 +1720,6 @@
         return;
       }
 
-      // Staff roles
       if (['warden', 'receptionist', 'cleaner', 'student'].includes(currentUser.role)) {
         if (targetView === 'staff_matrix') {
           switchView(targetView);
@@ -1733,10 +1810,10 @@
       const passInput = document.getElementById('inputCredPassword');
       if (type === 'superadmin') {
         idInput.value = 'admin@neuraliving.com';
-        passInput.value = 'SuperAdmin@Jaipur99';
+        passInput.value = '••••••••••••';
       } else {
-        idInput.value = 'owner@shreeram.com';
-        passInput.value = 'OwnerPass@2026';
+        idInput.value = 'owner@example-demo.in';
+        passInput.value = '••••••••••••';
       }
     }
 
@@ -1747,20 +1824,20 @@
 
       if (type === 'warden') {
         codeInput.value = 'PG-SHREERAM-101';
-        phoneInput.value = '98290 12345';
-        otpInput.value = '7941';
+        phoneInput.value = '98000 00001';
+        otpInput.value = '849201';
       } else if (type === 'receptionist') {
         codeInput.value = 'HT-RAJPUTANA-201';
-        phoneInput.value = '94140 88210';
-        otpInput.value = '5512';
+        phoneInput.value = '98000 00002';
+        otpInput.value = '551290';
       } else if (type === 'cleaner') {
         codeInput.value = 'HT-RAJPUTANA-201';
-        phoneInput.value = '98281 99012';
-        otpInput.value = '3890';
+        phoneInput.value = '98000 00003';
+        otpInput.value = '389012';
       } else if (type === 'student') {
         codeInput.value = 'PG-SHREERAM-101';
-        phoneInput.value = '98290 88990';
-        otpInput.value = '4102';
+        phoneInput.value = '98000 00004';
+        otpInput.value = '410298';
       }
     }
 
@@ -1778,7 +1855,7 @@
         currentUser = {
           role: 'owner',
           name: 'Devendra Sharma',
-          id: 'owner@shreeram.com'
+          id: 'owner@example-demo.in'
         };
         showToast('Welcome back, Devendra Sharma! (Property Owner)');
         switchView(pendingTargetView || 'owner');
@@ -1812,35 +1889,56 @@
 
     function quickLoginAs(role) {
       if (role === 'owner') {
-        currentUser = { role: 'owner', name: 'Devendra Sharma', id: 'owner@shreeram.com' };
-        showToast('Quick demo login as Property Owner');
+        currentUser = { role: 'owner', name: 'Devendra Sharma', id: 'owner@example-demo.in' };
+        showToast('Demo login: Property Owner');
         switchView('owner');
       } else if (role === 'superadmin') {
         currentUser = { role: 'superadmin', name: 'Platform Super Admin', id: 'admin@neuraliving.com' };
-        showToast('Quick demo login as Super Admin');
+        showToast('Demo login: Super Admin');
         switchView('superadmin');
       } else if (role === 'warden') {
         currentUser = { role: 'warden', name: 'Ram Singh (Warden)', propertyCode: 'PG-SHREERAM-101' };
-        showToast('Quick demo login as Warden');
+        showToast('Demo login: Warden');
         switchView('staff_matrix');
         switchStaffSubTab('warden');
       } else if (role === 'receptionist') {
         currentUser = { role: 'receptionist', name: 'Pooja Verma (Receptionist)', propertyCode: 'HT-RAJPUTANA-201' };
-        showToast('Quick demo login as Receptionist');
+        showToast('Demo login: Receptionist');
         switchView('staff_matrix');
         switchStaffSubTab('receptionist');
       } else if (role === 'student') {
         currentUser = { role: 'student', name: 'Rahul Sharma (Student)', propertyCode: 'PG-SHREERAM-101' };
-        showToast('Quick demo login as Student');
+        showToast('Demo login: Student');
         switchView('staff_matrix');
         switchStaffSubTab('student');
       }
       updateAuthUI();
     }
 
+    function impersonateOwner(ownerName) {
+      currentUser = {
+        role: 'owner',
+        name: ownerName,
+        isImpersonated: true
+      };
+      showToast(`Security Audit Event Logged: Super Admin impersonating ${ownerName}`);
+      document.getElementById('impersonationBanner').classList.remove('hidden');
+      switchView('owner');
+      updateAuthUI();
+    }
+
+    function exitImpersonation() {
+      document.getElementById('impersonationBanner').classList.add('hidden');
+      currentUser = { role: 'superadmin', name: 'Platform Super Admin', id: 'admin@neuraliving.com' };
+      showToast('Exited impersonation session. Returned to Super Admin HQ.');
+      switchView('superadmin');
+      updateAuthUI();
+    }
+
     function logout() {
       currentUser = null;
       pendingTargetView = null;
+      document.getElementById('impersonationBanner').classList.add('hidden');
       updateAuthUI();
       switchView('landing');
       showToast('You have been signed out. All panels are locked.');
@@ -1862,9 +1960,8 @@
         document.getElementById('userAvatar').innerText = currentUser.name[0];
 
         sessionPill.className = 'font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md';
-        sessionPill.innerText = `🟢 Logged in as: ${currentUser.name} (${currentUser.role.toUpperCase()})`;
+        sessionPill.innerText = `🟢 Authenticated: ${currentUser.name} (${currentUser.role.toUpperCase()})`;
 
-        // Unlock icons
         lockIcons.forEach(id => {
           const el = document.getElementById(`lock-${id}`);
           if (el) el.classList.add('hidden');
@@ -1877,7 +1974,6 @@
         sessionPill.className = 'font-bold text-slate-700 bg-slate-200/70 px-2 py-0.5 rounded-md';
         sessionPill.innerText = '🔒 Not Logged In (Public Guest Mode)';
 
-        // Lock icons visible
         lockIcons.forEach(id => {
           const el = document.getElementById(`lock-${id}`);
           if (el) el.classList.remove('hidden');
@@ -1937,33 +2033,33 @@
       showToast(`Switched active context to ${propId.toUpperCase()}`);
     }
 
-    // Render PG Beds
+    // Render PG Beds with Non-Color Status Indicators (Audit DS-05, A-02)
     function renderPGBeds(beds) {
       const container = document.getElementById('pgBedsGrid');
       if (!container) return;
       container.innerHTML = '';
 
       beds.forEach(bed => {
-        let statusBg = 'bg-white/80 border-slate-200 text-slate-700';
+        let statusBg = 'bg-white/90 border-slate-300 text-slate-800';
         let statusBadge = 'pill-slate';
-        let statusLabel = 'Vacant';
+        let statusLabel = '[○] Vacant';
 
         if (bed.status === 'OCCUPIED') {
-          statusBg = 'bg-emerald-50/70 border-emerald-200/80 text-emerald-950';
+          statusBg = 'bg-emerald-50/80 border-emerald-300 text-emerald-950';
           statusBadge = 'pill-emerald';
-          statusLabel = 'Occupied';
+          statusLabel = '[●] Occupied';
         } else if (bed.status === 'NOTICE') {
-          statusBg = 'bg-amber-50/70 border-amber-200/80 text-amber-950';
+          statusBg = 'bg-amber-50/80 border-amber-300 text-amber-950 border-dashed';
           statusBadge = 'pill-amber';
-          statusLabel = 'Notice';
+          statusLabel = '[▲] Notice';
         } else if (bed.status === 'RESERVED') {
-          statusBg = 'bg-sky-50/70 border-sky-200/80 text-sky-950';
+          statusBg = 'bg-sky-50/80 border-sky-300 text-sky-950 border-dotted';
           statusBadge = 'pill-sky';
-          statusLabel = 'Reserved';
+          statusLabel = '[■] Reserved';
         }
 
         const card = document.createElement('div');
-        card.className = `liquid-glass-card rounded-xl p-3 border cursor-pointer ${statusBg}`;
+        card.className = `liquid-glass-card rounded-xl p-3 border-2 cursor-pointer ${statusBg}`;
         card.onclick = () => openBedDetails(bed);
         card.innerHTML = `
           <div class="flex items-center justify-between">
@@ -2008,7 +2104,7 @@
       }
     }
 
-    // Render Hotel Rooms
+    // Render Hotel Rooms with Non-Color Status Indicators (Audit DS-05)
     function renderHotelRooms(rooms) {
       const container = document.getElementById('hotelRoomsGrid');
       if (!container) return;
@@ -2016,25 +2112,25 @@
 
       rooms.forEach(r => {
         let badgeColor = 'pill-emerald';
-        let label = 'Ready';
-        let cardBg = 'bg-white/80 border-slate-200';
+        let label = '✓ Ready';
+        let cardBg = 'bg-white/90 border-slate-300';
 
         if (r.status === 'OCCUPIED') {
           badgeColor = 'bg-slate-900 text-white';
-          label = 'Occupied';
-          cardBg = 'bg-slate-100/70 border-slate-300';
+          label = '● Occupied';
+          cardBg = 'bg-slate-100/90 border-slate-400';
         } else if (r.status === 'DIRTY') {
           badgeColor = 'pill-rose';
-          label = 'Dirty';
-          cardBg = 'bg-rose-50/60 border-rose-200';
+          label = '▲ Dirty';
+          cardBg = 'bg-rose-50/80 border-rose-300 border-dashed';
         } else if (r.status === 'CLEANING') {
           badgeColor = 'pill-sky';
-          label = 'Cleaning';
-          cardBg = 'bg-sky-50/60 border-sky-200';
+          label = '⟳ Cleaning';
+          cardBg = 'bg-sky-50/80 border-sky-300 border-dotted';
         }
 
         const card = document.createElement('div');
-        card.className = `liquid-glass-card rounded-xl p-3 border cursor-pointer ${cardBg}`;
+        card.className = `liquid-glass-card rounded-xl p-3 border-2 cursor-pointer ${cardBg}`;
         card.onclick = () => handleHotelRoomClick(r);
         card.innerHTML = `
           <div class="flex items-center justify-between">
@@ -2050,10 +2146,9 @@
 
     function handleHotelRoomClick(room) {
       if (room.status === 'OCCUPIED') {
-        openModal('gstInvoiceModal');
-        showToast(`Checkout modal opened for ${room.guest} in Room ${room.num}.`);
+        openGstInvoiceFor(`Room ${room.num}`, room.guest || 'Guest', room.rate, 2, 600);
       } else if (room.status === 'DIRTY') {
-        showToast(`Room ${room.num} is dirty. Cleaning task assigned.`);
+        showToast(`Room ${room.num} marked dirty. Housekeeping task assigned.`);
         room.status = 'CLEANING';
         renderHotelRooms(sampleHotelRooms);
       } else if (room.status === 'CLEANING') {
@@ -2065,7 +2160,85 @@
       }
     }
 
-    // Razorpay Integration & Simulation
+    // REAL INDIAN HOTEL GST RATIONALIZATION ENGINE (Audit L-03, L-04)
+    // - Room Tariff < ₹1,000: 0% GST (Exempt)
+    // - Room Tariff ₹1,000 to ₹7,500: 12% (6% CGST + 6% SGST)
+    // - Room Tariff > ₹7,500: 18% (9% CGST + 9% SGST)
+    // - Restaurant Food (SAC 996331): 5% (2.5% CGST + 2.5% SGST)
+    function openGstInvoiceFor(room, guestName, tariffPerNight, nights, foodAmount) {
+      document.getElementById('invGuestName').innerText = `${guestName} (${room})`;
+      
+      const lineItems = document.getElementById('invLineItems');
+      const taxBreakdown = document.getElementById('invTaxBreakdown');
+      lineItems.innerHTML = '';
+      taxBreakdown.innerHTML = '';
+
+      let roomGstRate = 0.12;
+      let roomGstLabel = '12% (6% CGST + 6% SGST)';
+      if (tariffPerNight < 1000) {
+        roomGstRate = 0.00;
+        roomGstLabel = '0% (Exempt)';
+      } else if (tariffPerNight > 7500) {
+        roomGstRate = 0.18;
+        roomGstLabel = '18% (9% CGST + 9% SGST)';
+      }
+
+      const totalRoomTariff = tariffPerNight * nights;
+      const roomCgst = totalRoomTariff * (roomGstRate / 2);
+      const roomSgst = totalRoomTariff * (roomGstRate / 2);
+
+      // Food extras: 5% (2.5% CGST + 2.5% SGST)
+      const foodGstRate = 0.05;
+      const foodCgst = foodAmount * (foodGstRate / 2);
+      const foodSgst = foodAmount * (foodGstRate / 2);
+
+      const totalTax = roomCgst + roomSgst + foodCgst + foodSgst;
+      const grandTotal = totalRoomTariff + foodAmount + totalTax;
+
+      // Populate Lines
+      lineItems.innerHTML += `
+        <tr>
+          <td class="py-1">Room Accommodation (${nights} Nights)</td>
+          <td class="py-1 font-mono">996311</td>
+          <td class="py-1">₹${totalRoomTariff.toLocaleString('en-IN')}</td>
+          <td class="py-1 text-right">${roomGstLabel}</td>
+          <td class="py-1 text-right font-semibold">₹${(totalRoomTariff + roomCgst + roomSgst).toLocaleString('en-IN')}</td>
+        </tr>
+      `;
+
+      if (foodAmount > 0) {
+        lineItems.innerHTML += `
+          <tr>
+            <td class="py-1">Restaurant Food & Room Service</td>
+            <td class="py-1 font-mono">996331</td>
+            <td class="py-1">₹${foodAmount.toLocaleString('en-IN')}</td>
+            <td class="py-1 text-right">5% (2.5% + 2.5%)</td>
+            <td class="py-1 text-right font-semibold">₹${(foodAmount + foodCgst + foodSgst).toLocaleString('en-IN')}</td>
+          </tr>
+        `;
+      }
+
+      // Populate Tax Breakdown
+      taxBreakdown.innerHTML = `
+        <div class="flex justify-between text-slate-500">
+          <span>CGST Total (Central Tax):</span>
+          <span>₹${(roomCgst + foodCgst).toFixed(2)}</span>
+        </div>
+        <div class="flex justify-between text-slate-500">
+          <span>SGST Total (State Tax - Rajasthan 08):</span>
+          <span>₹${(roomSgst + foodSgst).toFixed(2)}</span>
+        </div>
+      `;
+
+      document.getElementById('invTotalValue').innerText = `₹${grandTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+      openModal('gstInvoiceModal');
+    }
+
+    function printOrDownloadInvoice() {
+      showToast('Official GST Tax Invoice downloaded (PDF format with QR verification).');
+    }
+
+    // Razorpay Integration
     function openRazorpayModal(name, amount, purpose) {
       document.getElementById('rzpAmountDisplay').innerText = `₹${amount.toLocaleString('en-IN')}.00`;
       document.getElementById('rzpPurposeDisplay').innerText = `${purpose} • ${name}`;
@@ -2073,12 +2246,12 @@
     }
 
     function selectPaymentMethod(method) {
-      showToast(`Selected ${method.toUpperCase()} payment mode. Processing...`);
+      showToast(`Selected ${method.toUpperCase()} payment mode.`);
     }
 
     function confirmRazorpaySuccess() {
       closeModal('razorpayCheckoutModal');
-      showToast('🎉 Payment captured via Razorpay! Receipt generated & ledger updated.');
+      showToast('🎉 Payment captured via Razorpay! Reversal protection active.');
       const rahul = sampleBeds.find(b => b.student === 'Rahul Sharma');
       if (rahul) rahul.due = 0;
       renderPGBeds(sampleBeds);
@@ -2113,7 +2286,7 @@
 
     function finalizeRefund() {
       closeModal('depositRefundModal');
-      showToast('Deposit refund processed and logged in audit ledger.');
+      showToast('Deposit refund processed and logged in immutable ledger.');
     }
 
     // Guest QR Actions
@@ -2153,7 +2326,7 @@
     }
 
     function triggerAllReminders() {
-      showToast('🚀 WhatsApp reminders dispatched to 11 residents with direct UPI pay links!');
+      showToast('🚀 WhatsApp reminders dispatched with verified UPI pay links!');
     }
 
     function sendTenantWhatsApp(name, amount) {
@@ -2177,38 +2350,32 @@
       showToast(`Guest ${name} checked into Room ${roomNum}. Key card activated.`);
     }
 
-    function resolveTicket(btn) {
-      btn.innerText = 'Resolved ✓';
-      btn.className = 'px-2 py-1 text-[11px] font-bold bg-emerald-100 text-emerald-800 rounded';
-      showToast('Complaint ticket marked resolved. SLA clock stopped.');
-    }
-
     function toggleLang() {
       isHindi = !isHindi;
       document.getElementById('langBtn').innerText = isHindi ? 'EN' : 'हिंदी';
-      showToast(isHindi ? 'भाषा: हिंदी सक्रिय (Hindi UI Active)' : 'Language: English Active');
+      showToast(isHindi ? 'भाषा: हिंदी सक्रिय (Noto Sans Devanagari)' : 'Language: English Active');
     }
 
     function testSupabaseConnection() {
-      showToast('Testing Supabase REST API endpoint... Connected! 12 tables verified.');
+      showToast('Tested Supabase RLS Endpoint: Public QR policies verified secure.');
     }
 
     function downloadSchemaSQL() {
       window.open('schema.sql', '_blank');
-      showToast('Downloading schema.sql for Supabase PostgreSQL...');
+      showToast('Downloading schema.sql...');
     }
 
     function simulateWebhook() {
-      showToast('Webhook event "payment.captured" received: ₹8,500 settled into account.');
+      showToast('Simulated payment.captured webhook with HMAC signature verified.');
     }
 
     function saveConnectorSettings() {
       closeModal('connectorsModal');
-      showToast('Supabase & Razorpay connector settings saved!');
+      showToast('Connector settings saved.');
     }
 
     function exportCSV() {
-      showToast('Downloading consolidated financial & occupancy CSV export...');
+      showToast('Downloading audit ledger CSV...');
     }
   </script>
 </body>
